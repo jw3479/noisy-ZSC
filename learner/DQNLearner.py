@@ -17,18 +17,23 @@ class DeepQNetwork(nn.Module):
         super(DeepQNetwork, self).__init__()
         self.checkpoint_dir = chkpt_dir
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name)
-        self.fc1 = nn.Linear(input_dims, 4)
-        self.fc2 = nn.Linear(4, n_actions)
+        n_hidden_units = 8
+        self.fc1 = nn.Linear(input_dims, n_hidden_units)
+        self.fc2 = nn.Linear(n_hidden_units, n_hidden_units)
+        self.fc3 = nn.Linear(n_hidden_units, n_hidden_units)
+        self.fc4 = nn.Linear(n_hidden_units, n_actions)
 
         self.optimizer = optim.RMSprop(self.parameters(), lr=lr)
-        self.loss = nn.MSELoss()
+        self.loss = nn.L1Loss()
 
         self.device = T.device('cuda:0' if T.cuda.is_available() else 'cpu')
         self.to(self.device)
 
     def forward(self, state):
         x = F.relu(self.fc1(state))
-        return self.fc2(x)
+        x = F.relu(self.fc2(x))
+        x = F.relu(self.fc3(x))
+        return self.fc4(x)
 
     def save_checkpoint(self):
         print('... saving checkpoint ...')
@@ -44,7 +49,6 @@ class DDQNAgent():
     """
     Double Q-Learning agent with fnn function approximation
     Parameters:
-        q_net(FNN) - for Q eval and target network
         memory: ReplayBuffer with size mem_size
         batch_size: batch size to sample from ReplayBuffer
         eps_min; eps_dec: epsilon greedy param - setting epsilon decreasing
@@ -122,7 +126,7 @@ class DDQNAgent():
         self.q_eval.load_checkpoint()
         self.q_next.load_checkpoint()
 
-    def learn(self):
+    def learn_old(self):
         if self.memory.mem_cnt < self.batch_size:
             return
         self.q_eval.optimizer.zero_grad()
@@ -146,5 +150,34 @@ class DDQNAgent():
 
         self.decrement_epsilon()
 
+        return loss
 
+    def learn(self):
+        if self.memory.mem_cnt < self.batch_size:
+            return
+
+        self.q_eval.optimizer.zero_grad()
+        self.replace_target_network()
+
+        states, actions, rewards, states_, dones = self.sample_memory()
+        indices = np.arange(self.batch_size)
+
+        q_pred = self.q_eval.forward(states)[indices, actions]
+
+        q_next = self.q_next.forward(states_)
+
+        max_actions = T.argmax(q_next, dim=1)
+        q_next[dones,:] = 0.0
+
+        q_target = rewards + self.gamma*q_next[indices, max_actions]
+
+        loss = self.q_eval.loss(q_target, q_pred).to(self.q_eval.device)
+        loss.backward()
+
+        self.q_eval.optimizer.step()
+        self.learn_step_counter += 1
+
+        self.decrement_epsilon()
+
+        return loss
 

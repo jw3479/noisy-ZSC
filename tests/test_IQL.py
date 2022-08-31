@@ -1,105 +1,114 @@
 import torch as T
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
 import numpy as np
-import argparse, os
 from copy import deepcopy
 import random
 
-from game import NoisyLeverGame
+from game.noisy_lever_game import NoisyLeverGame
 from learner.DQNLearner import DDQNAgent
-from learner.DQNLearner import DeepQNetwork
 import matplotlib.pyplot as plt
 
-# testing vanilla independent Q-learning (IQL) with RNN for partial observability
+# testing vanilla independent Q-learning (IQL) with double DQN learning
 # i.e. each agent treats partner as part of the environment
 # without reasoning about joint actions
-
 
 def convert_dec(myList):
     return list(np.around(np.array(myList),2))
 
+
+
 def run():
+    # lever game with noisy true-lever game (gaussianm noi)
     game = NoisyLeverGame(
-        mean_payoffs=[1., 2., 3.],
-        sigma=0,
-        sigma1=0.5,
-        sigma2=1,
-        episode_length=10
+        mean_payoffs=[2., 2., 2.],
+        sigma=0.5,
+        sigma1=0,
+        sigma2=0,
+        episode_length=2
     )
 
     # Setup agents
 
-    agent1 = DDQNAgent(gamma=0.1, epsilon=0.2, lr=0.3, n_actions=len(game.mean_payoffs),
-                       input_dims=game.obs_dim(), mem_size=16,
-                       batch_size=8, eps_min=0.001,
-                       eps_dec=5e-3, replace=1000,
+    agent1 = DDQNAgent(gamma=1.0, epsilon=0.5, lr=0.001, n_actions=len(game.mean_payoffs),
+                       input_dims=game.obs_dim(), mem_size=4048,
+                       batch_size=256, eps_min=0.01,
+                       eps_dec=5e-5, replace=250,
                        algo=None, env_name="noisy_lever", chkpt_dir = 'tmp/dqn')
 
-    agent2 = DDQNAgent(gamma=0.1, epsilon=0.2, lr=0.3, n_actions=len(game.mean_payoffs),
-                       input_dims=game.obs_dim(), mem_size=16,
-                       batch_size=8, eps_min=0.001,
-                       eps_dec=5e-3, replace=1000,
-                       algo=None, env_name="noisy_lever", chkpt_dir='tmp/dqn')
-
-
-
+    agent2 = deepcopy(agent1)
     epi_reward_list = []
-    for episode in range(10000):
+    epi_list = []
+    epi_loss_list = []
+
+    for episode in range(100000):
         epi_reward = 0
-        print(f'episode: {episode}')
+        #print(f'episode: {episode}')
         joint_obs, true_state = game.reset()
-        print(f'True world E*: {convert_dec(true_state)}\n')
+        #print(f'True world E*: {convert_dec(true_state)}\n')
 
         obs1 = joint_obs[0]
         obs2 = joint_obs[1]
-        print(f'Obs1: {convert_dec(obs1)}, Obs2: {convert_dec(obs2)}\n')
-
+        #print(f'Obs1: {convert_dec(obs1)}, Obs2: {convert_dec(obs2)}\n')
+        if (episode+1) % 500 == 0:
+            print(f'episode: {episode}')
         done = False
         cnt = 0
         while not done:
-
             obs1 = joint_obs[0]
             obs2 = joint_obs[1]
 
-            if episode % 100 == 0:
-                print(agent1.q_eval(T.tensor(obs1)))
             action1 = agent1.choose_action(obs1)
-            action2 = agent2.choose_action(obs2)
+            #action2 = agent2.choose_action(obs2)
+            action2 = T.argmax(T.tensor(obs1[0:3]))
             ### test against constant action agent ###
             # hard-coded agent 2 who always plays lever 1
-
-            action2 = cnt % 3
 
             reward, done = game.step(action1, action2)
             epi_reward += reward
             if done:
-                epi_reward_list.append(epi_reward)
-            print(f'(A1, A2): ({action1}, {action2}) -> Reward: {np.around(reward,2)}, Done: {done}')
+                epi_reward_list.append(epi_reward / (game.episode_length * max(game.true_payoffs)))
+                epi_list.append(episode)
+            #print(f'(A1, A2): ({action1}, {action2}) -> Reward: {np.around(reward,2)}, Done: {done}')
 
             joint_obs_ = game.get_obs()
             obs1_ = joint_obs_[0]
             obs2_ = joint_obs_[1]
-            print(f'Obs1: {convert_dec(obs1)}, Obs2: {convert_dec(obs2)}', end='\n' if done else '\n\n')
+            #print(f'Obs1: {convert_dec(obs1)}, Obs2: {convert_dec(obs2)}', end='\n' if done else '\n\n')
 
             # Give experience to learners
             agent1.store_transition(obs1, action1, reward, obs1_, done)
-            agent1.store_transition(obs2, action1, reward, obs2_, done)
+            agent2.store_transition(obs2, action2, reward, obs2_, done)
 
             # Train learners
-            agent1.learn()
-            agent2.learn()
-
+            loss1 = agent1.learn_old()
+            # loss2 = agent2.learn_old()
             joint_obs = joint_obs_
 
-            cnt += 1
-    return epi_reward_list
+            if loss1 is not None:
+                epi_loss_list.append(loss1.item())
+            else:
+                epi_loss_list.append(2.0)
 
+            if (episode+1) % 500 == 0:
+                print(f'obs1: {obs1}, q-value: {agent1.q_eval.forward(T.tensor(obs1))}')
+
+            cnt += 1
+
+        if episode % 50 == 0:
+            plt.plot(epi_loss_list)
+            plt.semilogy()
+            plt.show(block=False)
+            plt.pause(0.1)
+            plt.close()
+
+    return epi_reward_list
 
 
 random.seed(42)
 reward_list = run()
 
-plt.plot(reward_list)
-plt.show()
+# example where DRQN > DQN
+# fist step with Dec-POMDP
+
+# Q value don't converge? add time step as obs
+
+# TODO: clean up script as a running example

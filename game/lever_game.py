@@ -35,11 +35,11 @@ class LeverGame:
             return [0, 0]
         else:
             # observation (harder): indicator of whether the last action was a match
-            #did_match = self.last_action1 == self.last_action2
-            #return [int(did_match), int(did_match)]
+            did_match = self.last_action1 == self.last_action2
+            return [int(did_match), int(did_match)]
 
             # observation (current): last action of partner
-            return [self.last_action2, self.last_action1]
+            #return [self.last_action2, self.last_action1]
 
     def is_terminal(self) -> bool:
         return self.episode_step >= self.episode_length
