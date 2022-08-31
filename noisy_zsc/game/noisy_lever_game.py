@@ -1,4 +1,4 @@
-from game.lever_game import LeverGame
+from .lever_game import LeverGame
 from typing import List, Tuple
 from random import normalvariate
 

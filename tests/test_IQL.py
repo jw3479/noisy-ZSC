@@ -3,8 +3,8 @@ import numpy as np
 from copy import deepcopy
 import random
 
-from game.noisy_lever_game import NoisyLeverGame
-from learner.DQNLearner import DDQNAgent
+from noisy_zsc.game import NoisyLeverGame
+from noisy_zsc.learner import DDQNAgent
 import matplotlib.pyplot as plt
 
 # testing vanilla independent Q-learning (IQL) with double DQN learning
@@ -13,8 +13,6 @@ import matplotlib.pyplot as plt
 
 def convert_dec(myList):
     return list(np.around(np.array(myList),2))
-
-
 
 def run():
     # lever game with noisy true-lever game (gaussianm noi)
@@ -96,7 +94,8 @@ def run():
         if episode % 50 == 0:
             plt.plot(epi_loss_list)
             plt.semilogy()
-            plt.show(block=False)
+            #plt.show(block=False)
+            plt.show()
             plt.pause(0.1)
             plt.close()
 

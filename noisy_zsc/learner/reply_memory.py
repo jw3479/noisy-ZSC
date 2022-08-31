@@ -2,8 +2,6 @@ import torch.nn as nn # layers
 import torch.nn.functional as F #activation function
 import torch.optim as optim #optimizers
 import torch as T # basic package
-
-import gym
 import numpy as np
 
 

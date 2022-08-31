@@ -3,12 +3,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 import numpy as np
-from learner.reply_memory import ReplayBuffer
+from .reply_memory import ReplayBuffer
 import argparse, os
 from copy import deepcopy
 import random
-
-from utils.learning_curve import plot_learning_curve
 
 
 # DQNetwork with checkpoint functionality

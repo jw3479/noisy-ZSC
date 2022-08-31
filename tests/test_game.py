@@ -1,4 +1,4 @@
-from game.noisy_lever_game import NoisyLeverGame
+from noisy_zsc.game import NoisyLeverGame
 
 
 
@@ -20,6 +20,6 @@ print(f'obs: {obs} (initial)')
 # Step through environment
 done = False
 while not done:
-    action = [0,0]
+    action = (0,0)
     obs, reward, done = env.step(action)
     print(f'obs: {obs}, reward: {reward}, done: {done}')
