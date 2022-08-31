@@ -9,13 +9,11 @@ from copy import deepcopy
 import random
 
 import numpy as np
-
-from utils import plot_learning_curve
-
+from .reply_memory import ReplayBuffer
 import os
 
 
-from learner.replay_memory import ReplayBuffer
+
 
 class RNN_DQNetwork(nn.Module):
     def __init__(self, rnn: nn.modules.RNNBase, fnn: nn.Module):

@@ -1,3 +1,4 @@
+#%%
 import torch as T
 import numpy as np
 from copy import deepcopy
@@ -7,15 +8,16 @@ from noisy_zsc.game import NoisyLeverGame
 from noisy_zsc.learner import DDQNAgent
 import matplotlib.pyplot as plt
 
-# testing vanilla independent Q-learning (IQL) with double DQN learning
-# i.e. each agent treats partner as part of the environment
-# without reasoning about joint actions
+# testing vanilla single-agent Q-learning with double DQN learning (assume agent 2 always just play the optimal lever;
+# the game is now equivalent to agent1 selecting the lever with maximum value)
+
+# test to see that the Q-values are correct
 
 def convert_dec(myList):
     return list(np.around(np.array(myList),2))
 
 def run():
-    # lever game with noisy true-lever game (gaussianm noi)
+    # lever game with noisy true-lever game (gaussianm noise)
     game = NoisyLeverGame(
         mean_payoffs=[2., 2., 2.],
         sigma=0.5,
@@ -23,8 +25,6 @@ def run():
         sigma2=0,
         episode_length=2
     )
-
-    # Setup agents
 
     agent1 = DDQNAgent(gamma=1.0, epsilon=0.5, lr=0.001, n_actions=len(game.mean_payoffs),
                        input_dims=game.obs_dim(), mem_size=4048,
@@ -100,7 +100,7 @@ def run():
             plt.close()
 
     return epi_reward_list
-
+#%%
 
 random.seed(42)
 reward_list = run()
@@ -111,3 +111,4 @@ reward_list = run()
 # Q value don't converge? add time step as obs
 
 # TODO: clean up script as a running example
+# %%

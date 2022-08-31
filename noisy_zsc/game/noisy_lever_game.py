@@ -38,7 +38,7 @@ class NoisyLeverGame:
     # how about common knowledge P(E*), P(E_A|E*), P(E_B|E*)
     def get_obs(self) -> List[Tuple]:
         true_obs1, true_obs2 = self.true_lever_game.get_obs()
-        return [self.payoffs1 + (self.true_lever_game.episode_step,), self.payoffs2 + (self.true_lever_game.episode_step,)]
+        #return [self.payoffs1 + (self.true_lever_game.episode_step,), self.payoffs2 + (self.true_lever_game.episode_step,)]
         return [self.payoffs1 + (true_obs1,self.sigma, self.sigma1, self.sigma2,self.true_lever_game.episode_step,),
                 self.payoffs2 + (true_obs2,self.sigma, self.sigma1, self.sigma2,self.true_lever_game.episode_step,)]
 
