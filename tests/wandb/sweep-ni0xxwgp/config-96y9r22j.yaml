@@ -1,0 +1,30 @@
+wandb_version: 1
+
+batch_size:
+  value: 16
+episode_length:
+  value: 1
+eps_dec:
+  value: 0.0005
+eps_min:
+  value: 0.01
+epsilon:
+  value: 0.5
+hidden_units:
+  value: 4
+layers:
+  value: 3
+learning_rate:
+  value: 0.05
+mean_r:
+  value: 8
+mem_size:
+  value: 32
+replace:
+  value: 50
+sigma:
+  value: 0.5
+sigma1:
+  value: 0
+sigma2:
+  value: 0

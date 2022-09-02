@@ -1,0 +1,36 @@
+{
+    "os": "Linux-4.18.0-147.8.1.el8_2.arc.x86_64-x86_64-with-glibc2.28",
+    "python": "3.9.12",
+    "heartbeatAt": "2022-09-02T12:26:37.143587",
+    "startedAt": "2022-09-02T12:26:36.656401",
+    "docker": null,
+    "cpu_count": 48,
+    "cuda": null,
+    "args": [
+        "--batch_size=16",
+        "--episode_length=1",
+        "--eps_dec=0.0002",
+        "--eps_min=0",
+        "--epsilon=1",
+        "--hidden_units=4",
+        "--layers=2",
+        "--learning_rate=0.012838487896847476",
+        "--mem_size=32",
+        "--replace=50",
+        "--sigma=0.5",
+        "--sigma1=0",
+        "--sigma2=0"
+    ],
+    "state": "running",
+    "program": "/data/engs-oxfair3/bras5206/noisy-ZSC/tests/test_IQL_wandb_sweep.py",
+    "codePath": "tests/test_IQL_wandb_sweep.py",
+    "git": {
+        "remote": "https://github.com/jw3479/noisy-ZSC.git",
+        "commit": "aee7bbf735817100c3149d104c099f56c49ad0f2"
+    },
+    "email": null,
+    "root": "/data/engs-oxfair3/bras5206/noisy-ZSC",
+    "host": "arc-c304",
+    "username": "bras5206",
+    "executable": "/home/bras5206/.conda/envs/pytorch/bin/python"
+}

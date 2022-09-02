@@ -16,3 +16,4 @@ module load Anaconda3
 # Load conda environment
 source activate $HOME/.conda/envs/pytorch
 
+wandb agent jia_wan/noisy-ZSC-tests/pirmkiut

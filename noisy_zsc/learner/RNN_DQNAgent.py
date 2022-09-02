@@ -13,8 +13,6 @@ from .reply_memory import ReplayBuffer
 import os
 
 
-
-
 class RNN_DQNetwork(nn.Module):
     def __init__(self, rnn: nn.modules.RNNBase, fnn: nn.Module):
         # set batch_first for the RNN to true
@@ -74,11 +72,5 @@ class RNN_DQNAgent:
         self.q_target = deepcopy(q_eval)
 
 
-        def choose_action(self, observation):
-            if np.random.random() > self.epsilon:
-
-
-
-
-
-
+        #def choose_action(self, observation):
+        #    if np.random.random() > self.epsilon:

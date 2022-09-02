@@ -22,7 +22,7 @@ class NoisyLeverGame:
 
     def reset(self) -> Tuple:
         # E* (true_payoffs) is drawn from gaussian distribution around mean_payoffs
-        self.true_payoffs = [normalvariate(payoff, self.sigma) for payoff in self.mean_payoffs]
+        self.true_payoffs = [max(0.01, normalvariate(payoff, self.sigma)) for payoff in self.mean_payoffs]
 
         # E_A (payoff1) and E_B (payoff2) are noisy versions of true_lever_game (adding noise to reward)
         self.payoffs1 = tuple([normalvariate(payoff, self.sigma1) for payoff in self.true_payoffs])
@@ -35,12 +35,14 @@ class NoisyLeverGame:
     def step(self, action1: int, action2: int) -> Tuple[float, bool]:
         return self.true_lever_game.step(action1, action2)
 
-    # how about common knowledge P(E*), P(E_A|E*), P(E_B|E*)
+
     def get_obs(self) -> List[Tuple]:
         true_obs1, true_obs2 = self.true_lever_game.get_obs()
         #return [self.payoffs1 + (self.true_lever_game.episode_step,), self.payoffs2 + (self.true_lever_game.episode_step,)]
-        return [self.payoffs1 + (true_obs1,self.sigma, self.sigma1, self.sigma2,self.true_lever_game.episode_step,),
-                self.payoffs2 + (true_obs2,self.sigma, self.sigma1, self.sigma2,self.true_lever_game.episode_step,)]
+        #return [self.payoffs1 + (true_obs1,self.sigma, self.sigma1, self.sigma2,self.true_lever_game.episode_step,),
+        #        self.payoffs2 + (true_obs2,self.sigma, self.sigma1, self.sigma2,self.true_lever_game.episode_step,)]
+        return [self.payoffs1 + (true_obs1,self.sigma, self.sigma1, self.sigma2,),
+                self.payoffs2 + (true_obs2,self.sigma, self.sigma1, self.sigma2,)]
 
     def is_terminal(self) -> bool:
         return self.true_lever_game.is_terminal()

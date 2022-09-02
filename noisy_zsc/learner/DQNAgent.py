@@ -11,15 +11,17 @@ import random
 
 # DQNetwork with checkpoint functionality
 class DeepQNetwork(nn.Module):
-    def __init__(self, lr, n_actions, name, input_dims, chkpt_dir):
+    def __init__(self, lr, n_actions, name, input_dims, chkpt_dir, hidden_units, layers):
         super(DeepQNetwork, self).__init__()
         self.checkpoint_dir = chkpt_dir
         self.checkpoint_file = os.path.join(self.checkpoint_dir, name)
-        n_hidden_units = 8
+        n_hidden_units = hidden_units
         self.fc1 = nn.Linear(input_dims, n_hidden_units)
         self.fc2 = nn.Linear(n_hidden_units, n_hidden_units)
         self.fc3 = nn.Linear(n_hidden_units, n_hidden_units)
-        self.fc4 = nn.Linear(n_hidden_units, n_actions)
+        self.fc4 = nn.Linear(n_hidden_units, n_hidden_units)
+        self.fc5 = nn.Linear(n_hidden_units, n_actions)
+        self.layers = layers
 
         self.optimizer = optim.RMSprop(self.parameters(), lr=lr)
         self.loss = nn.L1Loss()
@@ -29,9 +31,13 @@ class DeepQNetwork(nn.Module):
 
     def forward(self, state):
         x = F.relu(self.fc1(state))
-        x = F.relu(self.fc2(x))
-        x = F.relu(self.fc3(x))
-        return self.fc4(x)
+        if self.layers >= 3:
+            x = F.relu(self.fc2(x))
+        if self.layers >=4:
+            x = F.relu(self.fc3(x))
+        if self.layers >= 5:
+            x = F.relu(self.fc4(x))
+        return self.fc5(x)
 
     def save_checkpoint(self):
         print('... saving checkpoint ...')
@@ -57,7 +63,7 @@ class DDQNAgent():
     """
     def __init__(self, gamma, epsilon, lr, n_actions, input_dims, mem_size,
                  batch_size, eps_min = 0.01, eps_dec = 5e-7, replace = 1000,
-                 algo = None, env_name = None, chkpt_dir = 'tmp/dqn'):
+                 algo = None, env_name = None, chkpt_dir = 'tmp/dqn', hidden_units=4, layers=3):
 
         self.gamma = gamma
         self.epsilon = epsilon
@@ -71,13 +77,15 @@ class DDQNAgent():
         self.algo = algo
         self.env_name = env_name
         self.chkpt_dir = chkpt_dir
+        self.hidden_units = hidden_units
+        self.layers = layers
 
         self.action_space = [i for i in range(self.n_actions)] # easier to parse actions
         self.learn_step_counter = 0
         # track number of calls to learn to update when to
         # update target network
         self.memory = ReplayBuffer(mem_size, input_dims, n_actions)
-        self.q_eval = DeepQNetwork(lr, n_actions, "DQNetwork", input_dims, chkpt_dir)
+        self.q_eval = DeepQNetwork(lr, n_actions, "DQNetwork", input_dims, chkpt_dir, self.hidden_units, self.layers)
 
         # target network
         self.q_next = deepcopy(self.q_eval)
