@@ -3,6 +3,7 @@ import torch as T
 import numpy as np
 from copy import deepcopy
 import random
+import wandb
 
 from noisy_zsc.game import NoisyLeverGame
 from noisy_zsc.learner import DDQNAgent
@@ -16,20 +17,25 @@ def convert_dec(myList):
     return list(np.around(np.array(myList),2))
 
 def run():
+    wandb.init()
+    config = wandb.config
+    wandb.run.name = f"lr={config.learning_rate}-batch={config.batch_size}-hidden={config.hidden_units}-layers={config.layers}-mem={config.mem_size}-rep={config.replace}"
     # lever game with noisy true-lever game (gaussianm noise)
     game = NoisyLeverGame(
-        mean_payoffs=[2., 2., 2.],
+        #mean_payoffs=[2., 2., 2.],
+        mean_payoffs=[config.mean_r, config.mean_r, config.mean_r],
         sigma=0.5,
         sigma1=0,
         sigma2=0,
-        episode_length=5
+        episode_length=1
     )
 
-    agent1 = DDQNAgent(gamma=1.0, epsilon=0.5, lr=0.001, n_actions=len(game.mean_payoffs),
-                       input_dims=game.obs_dim(), mem_size=4048,
-                       batch_size=256, eps_min=0.01,
-                       eps_dec=5e-5, replace=250,
-                       algo=None, env_name="noisy_lever", chkpt_dir = 'tmp/dqn')
+    agent1 = DDQNAgent(gamma=1.0, epsilon=config.epsilon, lr=config.learning_rate, n_actions=len(game.mean_payoffs),
+                       input_dims=game.obs_dim(), mem_size=config.mem_size,
+                       batch_size=config.batch_size, eps_min=config.eps_min,
+                       eps_dec=config.eps_dec, replace=config.replace,
+                       algo=None, env_name="noisy_lever", chkpt_dir = 'tmp/dqn',
+                       hidden_units=config.hidden_units, layers = config.layers)
 
     agent2 = deepcopy(agent1)
     epi_reward_list = []
@@ -95,7 +101,11 @@ def run():
             #plt.show()
             plt.pause(0.1)
             plt.close()
-
+        
+        stats = stats = {
+        "reward": epi_reward,
+        }
+        wandb.log(stats)
     return epi_reward_list
 #%%
 

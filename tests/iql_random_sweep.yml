@@ -1,0 +1,67 @@
+program: test_IQL.py
+project: IQL-parameter-search
+entity: Jia
+method: random
+metric:
+  goal: maximize
+  name: reward
+name: IQL-random-sweep
+parameters:
+  batch_size:
+    values: 
+      - 16
+      - 32
+      - 64
+      - 128
+  episode_length:
+    value: 1
+  eps_dec:
+    value: 0.0005
+  eps_min:
+    value: 0.01
+  epsilon:
+    value: 0.5
+  hidden_units:
+    values:
+      - 4
+      - 8
+      - 16
+  layers:
+    values:
+      - 2
+      - 3
+      - 4
+      - 5
+  learning_rate:
+    distribution: log_uniform_values
+    max: 0.1
+    min: 0.001
+  mem_size:
+    values:
+      - 16
+      - 32
+      - 64
+      - 128
+      - 256
+      - 512
+      - 1024
+  replace:
+    values:
+      - 25
+      - 50
+      - 100
+      - 200
+  sigma:
+    value: 0.5
+  sigma1:
+    value: 0
+  sigma2:
+    value: 0
+  mean_r:
+    values:
+      - 2
+      - 4
+      - 8
+      - 16
+      - 32
+  

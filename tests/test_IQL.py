@@ -8,10 +8,9 @@ from noisy_zsc.game import NoisyLeverGame
 from noisy_zsc.learner import DDQNAgent
 import matplotlib.pyplot as plt
 
-# testing vanilla single-agent Q-learning with double DQN learning (assume agent 2 always just play the optimal lever;
-# the game is now equivalent to agent1 selecting the lever with maximum value)
-
-# test to see that the Q-values are correct
+# testing vanilla independent Q-learning (IQL) with double DQN learning
+# i.e. each agent treats partner as part of the environment
+# without reasoning about joint actions
 
 def convert_dec(myList):
     return list(np.around(np.array(myList),2))
@@ -23,7 +22,7 @@ def run():
         sigma=0.5,
         sigma1=0,
         sigma2=0,
-        episode_length=2
+        episode_length=5
     )
 
     agent1 = DDQNAgent(gamma=1.0, epsilon=0.5, lr=0.001, n_actions=len(game.mean_payoffs),
@@ -55,11 +54,8 @@ def run():
             obs2 = joint_obs[1]
 
             action1 = agent1.choose_action(obs1)
-            #action2 = agent2.choose_action(obs2)
-            action2 = T.argmax(T.tensor(obs1[0:3]))
-            ### test against constant action agent ###
-            # hard-coded agent 2 who always plays lever 1
-
+            action2 = agent2.choose_action(obs2)
+            
             reward, done = game.step(action1, action2)
             epi_reward += reward
             if done:
@@ -78,7 +74,7 @@ def run():
 
             # Train learners
             loss1 = agent1.learn_old()
-            # loss2 = agent2.learn_old()
+            loss2 = agent2.learn_old()
             joint_obs = joint_obs_
 
             if loss1 is not None:
@@ -86,16 +82,17 @@ def run():
             else:
                 epi_loss_list.append(2.0)
 
-            if (episode+1) % 500 == 0:
-                print(f'obs1: {obs1}, q-value: {agent1.q_eval.forward(T.tensor(obs1))}')
+            #if (episode+1) % 500 == 0:
+            #    print(f'obs1: {obs1}, q-value: {agent1.q_eval.forward(T.tensor(obs1))}')
 
             cnt += 1
 
         if episode % 50 == 0:
-            plt.plot(epi_loss_list)
-            plt.semilogy()
-            #plt.show(block=False)
-            plt.show()
+            #plt.plot(epi_loss_list)
+            plt.scatter(epi_list, epi_reward_list)
+            #plt.semilogy()
+            plt.show(block=False)
+            #plt.show()
             plt.pause(0.1)
             plt.close()
 
@@ -109,6 +106,3 @@ reward_list = run()
 # fist step with Dec-POMDP
 
 # Q value don't converge? add time step as obs
-
-# TODO: clean up script as a running example
-# %%
