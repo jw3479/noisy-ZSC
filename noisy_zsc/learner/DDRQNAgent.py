@@ -1,7 +1,8 @@
 # Double Q-Learning to train RNN policies
 # Under independent Q-learning: purely treating opponent as environment
 
-from typing import Optional
+from itertools import zip_longest
+from typing import Iterable, Optional
 import torch.nn as nn # layers
 import torch.nn.functional as F #activation function
 import torch.optim as optim #optimizers
@@ -12,6 +13,34 @@ import random
 import numpy as np
 from .reply_memory import EpisodeBuffer, ReplayBuffer
 import os
+
+
+## Matthias' polyak update
+def zip_strict(*iterables: Iterable) -> Iterable:
+    sentinel = object()
+    for combo in zip_longest(*iterables, fillvalue=sentinel):
+        if sentinel in combo:
+            raise ValueError("Iterables have different lengths")
+        yield combo
+
+
+def polyak_update(
+    params: Iterable[nn.Parameter], ## param of current network
+    target_params: Iterable[nn.Parameter],  ## param of current network
+    tau: float,
+) -> None:
+    """
+    Polyak (soft) target network update.
+    Inspired by implementation of stable-baselines3:
+    https://github.com/DLR-RM/stable-baselines3/
+    """
+    with T.no_grad():
+        # Use `zip_strict`, since `zip` does not raise an excception if
+        # lengths of parameter iterables differ.
+        for param, target_param in zip_strict(params, target_params):
+            target_param.data.mul_(1 - tau) # 1-tau of target # tau of online
+            T.add(
+                target_param.data, param.data, alpha=tau, out=target_param.data)
 
 
 class DDRQNetwork(nn.Module):
@@ -59,7 +88,7 @@ class DDRQNAgent:
 
     def __init__(self, q_eval: DDRQNetwork, gamma, epsilon, lr, n_actions, input_dims, mem_size,
                  batch_size, episode_length, eps_min = 0.01, eps_dec = 5e-5, replace = 1000,
-                 hidden_units=4):
+                 hidden_units=4, tau = 1.0):
 
         self.gamma = gamma
         self.epsilon = epsilon
@@ -71,8 +100,8 @@ class DDRQNAgent:
         self.eps_dec = eps_dec
         self.replace_target_cnt = replace
         self.hidden_units = hidden_units
+        self.tau = tau
         
-
         self.action_space = [i for i in range(self.n_actions)] # easier to parse actions
         self.learn_step_counter = 0
         # track number of calls to learn to update when to
@@ -105,7 +134,7 @@ class DDRQNAgent:
             action = np.random.choice(self.action_space)
 
         return action
-
+    
     def store_transition(self, state, action, reward, state_, done):
         self.memory.store_transition(state, action, reward, state_, done)
 
@@ -119,16 +148,26 @@ class DDRQNAgent:
 
         return states, actions, rewards, states_, dones
 
+
+    # implement polyak soft update 
+    # - unstable performance when directly copying target network
+    
     def replace_target_network(self):
         if self.learn_step_counter % self.replace_target_cnt == 0:
-            self.q_next.load_state_dict(self.q_eval.state_dict())
+            #self.q_next.load_state_dict(self.q_eval.state_dict())
+            polyak_update(self.q_eval.parameters(), self.q_next.parameters(), self.tau)
+
+
+    ### Polyak soft update
+
+    
 
     def decrement_epsilon(self):
         self.epsilon = self.epsilon - self.eps_dec if self.epsilon > self.eps_min else self.eps_min
 
     def learn(self):
         if self.memory.mem_cnt < self.batch_size:
-            return
+            return None
 
         self.q_eval.optimizer.zero_grad()
         self.replace_target_network()
