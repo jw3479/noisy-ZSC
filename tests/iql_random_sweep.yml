@@ -37,14 +37,5 @@ parameters:
   sigma2:
     value: 0
   sigma:
-    values:
-      - 0.5
-      - 1
-      - 2
-      - 4
-      - 8 
-      - 16
-      - 32
-      - 50
-      - 64
+    value: 64
   

@@ -90,8 +90,10 @@ class DDQNAgent():
         # target network
         self.q_next = deepcopy(self.q_eval)
 
-    def choose_action(self, observation):
-        if np.random.random() > self.epsilon:
+    def choose_action(self, observation, epsilon = None):
+        if epsilon is None:
+            epsilon = self.epsilon
+        if np.random.random() > epsilon:
             # w.p. 1-epsilon, greedy
             # alternative: softmax
             state = T.tensor([observation]).to(self.q_eval.device)
@@ -183,7 +185,9 @@ class DDQNAgent():
         self.q_eval.optimizer.step()
         self.learn_step_counter += 1
 
+        # linearly decaying epsilon
         self.decrement_epsilon()
 
+        # uniformly random wp 1 then 0 after 5k 
         return loss
 

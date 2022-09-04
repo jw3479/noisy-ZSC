@@ -1,6 +1,0 @@
-Traceback (most recent call last):
-  File "/data/engs-oxfair3/bras5206/noisy-ZSC/tests/test_IQL_wandb_sweep.py", line 126, in <module>
-    reward_list = run()
-  File "/data/engs-oxfair3/bras5206/noisy-ZSC/tests/test_IQL_wandb_sweep.py", line 116, in run
-    "prop_1": sum(1 for a in action_buffer if a == 1) / action_buffer.count,
-TypeError: unsupported operand type(s) for /: 'int' and 'builtin_function_or_method'

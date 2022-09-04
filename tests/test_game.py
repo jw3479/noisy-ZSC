@@ -20,6 +20,5 @@ print(f'obs: {obs} (initial)')
 # Step through environment
 done = False
 while not done:
-    action = (0,0)
-    obs, reward, done = env.step(action)
+    reward, done = env.step(0,0)
     print(f'obs: {obs}, reward: {reward}, done: {done}')

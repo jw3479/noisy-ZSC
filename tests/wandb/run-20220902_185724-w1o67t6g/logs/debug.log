@@ -1,0 +1,26 @@
+2022-09-02 18:57:24,617 INFO    MainThread:4036134 [wandb_setup.py:_flush():76] Configure stats pid to 4036134
+2022-09-02 18:57:24,618 INFO    MainThread:4036134 [wandb_setup.py:_flush():76] Loading settings from /home/bras5206/.config/wandb/settings
+2022-09-02 18:57:24,618 INFO    MainThread:4036134 [wandb_setup.py:_flush():76] Loading settings from wandb/settings
+2022-09-02 18:57:24,618 INFO    MainThread:4036134 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'_require_service': 'True', 'entity': 'jia_wan', 'project': 'noisy-ZSC-tests', 'sweep_id': 'i2hxbgb9', 'root_dir': '/data/engs-oxfair3/bras5206/noisy-ZSC/tests', 'run_id': 'w1o67t6g', 'sweep_param_path': '/data/engs-oxfair3/bras5206/noisy-ZSC/tests/wandb/sweep-i2hxbgb9/config-w1o67t6g.yaml'}
+2022-09-02 18:57:24,618 INFO    MainThread:4036134 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'tests/test_IQL_wandb_sweep.py', 'program': '/data/engs-oxfair3/bras5206/noisy-ZSC/tests/test_IQL_wandb_sweep.py'}
+2022-09-02 18:57:24,618 INFO    MainThread:4036134 [wandb_init.py:_log_setup():461] Logging user logs to /data/engs-oxfair3/bras5206/noisy-ZSC/tests/wandb/run-20220902_185724-w1o67t6g/logs/debug.log
+2022-09-02 18:57:24,618 INFO    MainThread:4036134 [wandb_init.py:_log_setup():462] Logging internal logs to /data/engs-oxfair3/bras5206/noisy-ZSC/tests/wandb/run-20220902_185724-w1o67t6g/logs/debug-internal.log
+2022-09-02 18:57:24,619 INFO    MainThread:4036134 [wandb_init.py:init():495] calling init triggers
+2022-09-02 18:57:24,619 INFO    MainThread:4036134 [wandb_init.py:init():498] wandb.init called with sweep_config: {'batch_size': 16, 'episode_length': 1, 'eps_dec': 0.0002, 'eps_min': 0, 'epsilon': 1, 'hidden_units': 4, 'layers': 4, 'learning_rate': 0.0005777702570927721, 'mem_size': 32, 'replace': 50, 'sigma': 64, 'sigma1': 0, 'sigma2': 0}
+config: {}
+2022-09-02 18:57:24,619 INFO    MainThread:4036134 [wandb_init.py:init():548] starting backend
+2022-09-02 18:57:24,619 INFO    MainThread:4036134 [wandb_init.py:init():552] setting up manager
+2022-09-02 18:57:24,631 INFO    MainThread:4036134 [backend.py:_multiprocessing_setup():97] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2022-09-02 18:57:24,644 INFO    MainThread:4036134 [wandb_init.py:init():558] backend started and connected
+2022-09-02 18:57:24,654 INFO    MainThread:4036134 [wandb_run.py:_config_callback():1152] config_cb None None {'batch_size': 16, 'episode_length': 1, 'eps_dec': 0.0002, 'eps_min': 0, 'epsilon': 1, 'hidden_units': 4, 'layers': 4, 'learning_rate': 0.0005777702570927721, 'mem_size': 32, 'replace': 50, 'sigma': 64, 'sigma1': 0, 'sigma2': 0}
+2022-09-02 18:57:24,655 INFO    MainThread:4036134 [wandb_init.py:init():636] updated telemetry
+2022-09-02 18:57:24,668 INFO    MainThread:4036134 [wandb_init.py:init():667] communicating run to backend with 30 second timeout
+2022-09-02 18:57:25,033 INFO    MainThread:4036134 [wandb_run.py:_on_init():1982] communicating current version
+2022-09-02 18:57:25,084 INFO    MainThread:4036134 [wandb_run.py:_on_init():1986] got version response 
+2022-09-02 18:57:25,084 INFO    MainThread:4036134 [wandb_init.py:init():700] starting run threads in backend
+2022-09-02 18:57:29,678 INFO    MainThread:4036134 [wandb_run.py:_console_start():1962] atexit reg
+2022-09-02 18:57:29,678 INFO    MainThread:4036134 [wandb_run.py:_redirect():1820] redirect: SettingsConsole.WRAP_RAW
+2022-09-02 18:57:29,678 INFO    MainThread:4036134 [wandb_run.py:_redirect():1885] Wrapping output streams.
+2022-09-02 18:57:29,678 INFO    MainThread:4036134 [wandb_run.py:_redirect():1907] Redirects installed.
+2022-09-02 18:57:29,679 INFO    MainThread:4036134 [wandb_init.py:init():732] run started, returning control to user process
+2022-09-02 18:58:56,898 WARNING MsgRouterThr:4036134 [router.py:message_loop():76] message_loop has been closed

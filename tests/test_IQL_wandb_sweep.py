@@ -17,9 +17,6 @@ import matplotlib.pyplot as plt
 def convert_dec(myList):
     return list(np.around(np.array(myList),2))
 
-
-
-
 def run():
     wandb.init()
     config = wandb.config
@@ -63,9 +60,12 @@ def run():
         while not done:
             obs1 = joint_obs[0]
             obs2 = joint_obs[1]
-
-            action1 = agent1.choose_action(obs1)
-            action2 = agent2.choose_action(obs2)
+            if episode < 5000:
+                epsilon_ = 1
+            else:
+                epsilon_ = 0
+            action1 = agent1.choose_action(obs1, epsilon_)
+            action2 = agent2.choose_action(obs2, epsilon_)
             if action1 == action2:
                 action_buffer.append(action1)
             else:

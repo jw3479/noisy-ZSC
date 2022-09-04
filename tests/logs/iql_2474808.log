@@ -1,0 +1,20 @@
+wandb: Starting wandb agent 🕵️
+2022-09-02 15:13:53,180 - wandb.wandb_agent - INFO - Running runs: []
+2022-09-02 15:13:53,483 - wandb.wandb_agent - INFO - Agent received command: run
+2022-09-02 15:13:53,492 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 16
+	episode_length: 1
+	eps_dec: 0.0002
+	eps_min: 0
+	epsilon: 1
+	hidden_units: 4
+	layers: 3
+	learning_rate: 0.0006218081520533921
+	mem_size: 32
+	replace: 50
+	sigma: 1
+	sigma1: 0
+	sigma2: 0
+2022-09-02 15:13:53,568 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python test_IQL_wandb_sweep.py --batch_size=16 --episode_length=1 --eps_dec=0.0002 --eps_min=0 --epsilon=1 --hidden_units=4 --layers=3 --learning_rate=0.0006218081520533921 --mem_size=32 --replace=50 --sigma=1 --sigma1=0 --sigma2=0
+2022-09-02 15:13:58,581 - wandb.wandb_agent - INFO - Running runs: ['shoglb3j']
+slurmstepd: error: *** JOB 2474808 ON arc-c307 CANCELLED AT 2022-09-02T15:13:59 ***

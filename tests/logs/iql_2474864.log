@@ -1,0 +1,152 @@
+wandb: Starting wandb agent 🕵️
+2022-09-02 15:20:06,956 - wandb.wandb_agent - INFO - Running runs: []
+2022-09-02 15:20:07,192 - wandb.wandb_agent - INFO - Agent received command: run
+2022-09-02 15:20:07,192 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 16
+	episode_length: 1
+	eps_dec: 0.0002
+	eps_min: 0
+	epsilon: 1
+	hidden_units: 4
+	layers: 2
+	learning_rate: 0.04144763696174605
+	mem_size: 32
+	replace: 50
+	sigma: 2
+	sigma1: 0
+	sigma2: 0
+2022-09-02 15:20:07,197 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python test_IQL_wandb_sweep.py --batch_size=16 --episode_length=1 --eps_dec=0.0002 --eps_min=0 --epsilon=1 --hidden_units=4 --layers=2 --learning_rate=0.04144763696174605 --mem_size=32 --replace=50 --sigma=2 --sigma1=0 --sigma2=0
+2022-09-02 15:20:12,207 - wandb.wandb_agent - INFO - Running runs: ['i19teegu']
+wandb: Currently logged in as: jia_wan. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.13.2
+wandb: Run data is saved locally in /data/engs-oxfair3/bras5206/noisy-ZSC/tests/wandb/run-20220902_152012-i19teegu
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run good-sweep-4
+wandb: ⭐️ View project at https://wandb.ai/jia_wan/noisy-ZSC-tests
+wandb: 🧹 View sweep at https://wandb.ai/jia_wan/noisy-ZSC-tests/sweeps/g51p8efd
+wandb: 🚀 View run at https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/i19teegu
+/data/engs-oxfair3/bras5206/noisy-ZSC/noisy_zsc/learner/DQNAgent.py:150: UserWarning: masked_fill_ received a mask with dtype torch.uint8, this behavior is now deprecated,please use a mask with dtype torch.bool instead. (Triggered internally at  /opt/conda/conda-bld/pytorch_1659484746322/work/aten/src/ATen/native/TensorAdvancedIndexing.cpp:1581.)
+  q_next[dones] = 0.0
+/home/bras5206/.conda/envs/pytorch/lib/python3.9/site-packages/torch/autograd/__init__.py:173: UserWarning: masked_fill_ received a mask with dtype torch.uint8, this behavior is now deprecated,please use a mask with dtype torch.bool instead. (Triggered internally at  /opt/conda/conda-bld/pytorch_1659484746322/work/aten/src/ATen/native/TensorAdvancedIndexing.cpp:1581.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+episode: 999
+episode: 1999
+episode: 2999
+episode: 3999
+episode: 4999
+episode: 5999
+episode: 6999
+episode: 7999
+episode: 8999
+episode: 9999
+2022-09-02 15:21:30,239 - wandb.wandb_agent - INFO - Cleaning up finished run: i19teegu
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: - 0.002 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: \ 0.007 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: | 0.007 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: / 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: - 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: \ 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: | 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: / 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: - 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: \ 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:  prop_1 ▆▇█▇▇▇▇▇▇▇▆▇▇▇▆▆▇▆▆▆▅▄▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:  prop_2 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▄▅▇████████████████
+wandb:  prop_3 ▅▅▅▆▆▇▇▇██████▇█▇██▇▇▅▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: prop_NA ████████████████████▇▅▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:  reward ▁▁█▇▁▁▁▁▁▁▁▁█▁██▁▁▁▁████████████████████
+wandb: 
+wandb: Run summary:
+wandb:  prop_1 0.0
+wandb:  prop_2 1.0
+wandb:  prop_3 0.0
+wandb: prop_NA 0.0
+wandb:  reward 0.99291
+wandb: 
+wandb: Synced good-sweep-4: https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/i19teegu
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20220902_152012-i19teegu/logs
+2022-09-02 15:21:36,133 - wandb.wandb_agent - INFO - Agent received command: run
+2022-09-02 15:21:36,141 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 16
+	episode_length: 1
+	eps_dec: 0.0002
+	eps_min: 0
+	epsilon: 1
+	hidden_units: 4
+	layers: 4
+	learning_rate: 0.000262074564596771
+	mem_size: 32
+	replace: 50
+	sigma: 0.5
+	sigma1: 0
+	sigma2: 0
+2022-09-02 15:21:36,144 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python test_IQL_wandb_sweep.py --batch_size=16 --episode_length=1 --eps_dec=0.0002 --eps_min=0 --epsilon=1 --hidden_units=4 --layers=4 --learning_rate=0.000262074564596771 --mem_size=32 --replace=50 --sigma=0.5 --sigma1=0 --sigma2=0
+wandb: Currently logged in as: jia_wan. Use `wandb login --relogin` to force relogin
+2022-09-02 15:21:41,154 - wandb.wandb_agent - INFO - Running runs: ['ozzitbqa']
+wandb: Tracking run with wandb version 0.13.2
+wandb: Run data is saved locally in /data/engs-oxfair3/bras5206/noisy-ZSC/tests/wandb/run-20220902_152140-ozzitbqa
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run likely-sweep-10
+wandb: ⭐️ View project at https://wandb.ai/jia_wan/noisy-ZSC-tests
+wandb: 🧹 View sweep at https://wandb.ai/jia_wan/noisy-ZSC-tests/sweeps/g51p8efd
+wandb: 🚀 View run at https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/ozzitbqa
+/data/engs-oxfair3/bras5206/noisy-ZSC/noisy_zsc/learner/DQNAgent.py:150: UserWarning: masked_fill_ received a mask with dtype torch.uint8, this behavior is now deprecated,please use a mask with dtype torch.bool instead. (Triggered internally at  /opt/conda/conda-bld/pytorch_1659484746322/work/aten/src/ATen/native/TensorAdvancedIndexing.cpp:1581.)
+  q_next[dones] = 0.0
+/home/bras5206/.conda/envs/pytorch/lib/python3.9/site-packages/torch/autograd/__init__.py:173: UserWarning: masked_fill_ received a mask with dtype torch.uint8, this behavior is now deprecated,please use a mask with dtype torch.bool instead. (Triggered internally at  /opt/conda/conda-bld/pytorch_1659484746322/work/aten/src/ATen/native/TensorAdvancedIndexing.cpp:1581.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+episode: 999
+episode: 1999
+episode: 2999
+episode: 3999
+episode: 4999
+episode: 5999
+episode: 6999
+episode: 7999
+episode: 8999
+episode: 9999
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: \ 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: | 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: / 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: - 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: \ 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb: | 0.009 MB of 0.009 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:  prop_1 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▄▅▇████████████████
+wandb:  prop_2 █▇████▇▇████▇▇▇▇▇▇▇▇▇▆▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:  prop_3 █▇▇▇▇▇▇▇▇██▇▇▇▇▇▇██▇▆▅▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: prop_NA ▇█▇███████▇█████████▇▅▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:  reward ▁███▁▁▁▁▁▁▁▁▁▁▁▁▁▁█▁████████████████████
+wandb: 
+wandb: Run summary:
+wandb:  prop_1 1.0
+wandb:  prop_2 0.0
+wandb:  prop_3 0.0
+wandb: prop_NA 0.0
+wandb:  reward 1.0
+wandb: 
+wandb: Synced likely-sweep-10: https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/ozzitbqa
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20220902_152140-ozzitbqa/logs
+2022-09-02 15:23:08,896 - wandb.wandb_agent - INFO - Cleaning up finished run: ozzitbqa
+2022-09-02 15:23:09,150 - wandb.wandb_agent - INFO - Agent received command: run
+2022-09-02 15:23:09,150 - wandb.wandb_agent - INFO - Agent starting run with config:
+	batch_size: 16
+	episode_length: 1
+	eps_dec: 0.0002
+	eps_min: 0
+	epsilon: 1
+	hidden_units: 4
+	layers: 3
+	learning_rate: 0.006859589303267493
+	mem_size: 32
+	replace: 50
+	sigma: 32
+	sigma1: 0
+	sigma2: 0
+2022-09-02 15:23:09,155 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python test_IQL_wandb_sweep.py --batch_size=16 --episode_length=1 --eps_dec=0.0002 --eps_min=0 --epsilon=1 --hidden_units=4 --layers=3 --learning_rate=0.006859589303267493 --mem_size=32 --replace=50 --sigma=32 --sigma1=0 --sigma2=0
+wandb: Currently logged in as: jia_wan. Use `wandb login --relogin` to force relogin
+2022-09-02 15:23:14,166 - wandb.wandb_agent - INFO - Running runs: ['v51bcqta']
+wandb: Tracking run with wandb version 0.13.2
+wandb: Run data is saved locally in /data/engs-oxfair3/bras5206/noisy-ZSC/tests/wandb/run-20220902_152313-v51bcqta
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run elated-sweep-14
+wandb: ⭐️ View project at https://wandb.ai/jia_wan/noisy-ZSC-tests
+wandb: 🧹 View sweep at https://wandb.ai/jia_wan/noisy-ZSC-tests/sweeps/g51p8efd
+wandb: 🚀 View run at https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/v51bcqta
+/data/engs-oxfair3/bras5206/noisy-ZSC/noisy_zsc/learner/DQNAgent.py:150: UserWarning: masked_fill_ received a mask with dtype torch.uint8, this behavior is now deprecated,please use a mask with dtype torch.bool instead. (Triggered internally at  /opt/conda/conda-bld/pytorch_1659484746322/work/aten/src/ATen/native/TensorAdvancedIndexing.cpp:1581.)
+  q_next[dones] = 0.0
+/home/bras5206/.conda/envs/pytorch/lib/python3.9/site-packages/torch/autograd/__init__.py:173: UserWarning: masked_fill_ received a mask with dtype torch.uint8, this behavior is now deprecated,please use a mask with dtype torch.bool instead. (Triggered internally at  /opt/conda/conda-bld/pytorch_1659484746322/work/aten/src/ATen/native/TensorAdvancedIndexing.cpp:1581.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+slurmstepd: error: *** JOB 2474864 ON arc-c288 CANCELLED AT 2022-09-02T15:24:22 ***

@@ -1,0 +1,24 @@
+2022-09-02 19:00:05,501 INFO    StreamThr :4037646 [internal.py:wandb_internal():90] W&B internal server running at pid: 4037646, started at: 2022-09-02 19:00:05.499742
+2022-09-02 19:00:05,502 DEBUG   HandlerThread:4037646 [handler.py:handle_request():141] handle_request: status
+2022-09-02 19:00:05,507 DEBUG   SenderThread:4037646 [sender.py:send_request():316] send_request: status
+2022-09-02 19:00:05,529 DEBUG   SenderThread:4037646 [sender.py:send():302] send: header
+2022-09-02 19:00:05,529 INFO    WriterThread:4037646 [datastore.py:open_for_write():75] open: /data/engs-oxfair3/bras5206/noisy-ZSC/tests/wandb/run-20220902_190005-r0uaa50y/run-r0uaa50y.wandb
+2022-09-02 19:00:05,537 DEBUG   SenderThread:4037646 [sender.py:send():302] send: run
+2022-09-02 19:00:05,872 DEBUG   HandlerThread:4037646 [handler.py:handle_request():141] handle_request: check_version
+2022-09-02 19:00:05,873 INFO    SenderThread:4037646 [dir_watcher.py:__init__():216] watching files in: /data/engs-oxfair3/bras5206/noisy-ZSC/tests/wandb/run-20220902_190005-r0uaa50y/files
+2022-09-02 19:00:05,874 INFO    SenderThread:4037646 [sender.py:_start_run_threads():913] run started: r0uaa50y with start time 1662141605.503754
+2022-09-02 19:00:05,874 DEBUG   SenderThread:4037646 [sender.py:send():302] send: summary
+2022-09-02 19:00:05,875 INFO    SenderThread:4037646 [sender.py:_save_file():1156] saving file wandb-summary.json with policy end
+2022-09-02 19:00:05,875 DEBUG   SenderThread:4037646 [sender.py:send_request():316] send_request: check_version
+2022-09-02 19:00:05,974 DEBUG   HandlerThread:4037646 [handler.py:handle_request():141] handle_request: run_start
+2022-09-02 19:00:05,977 DEBUG   HandlerThread:4037646 [meta.py:__init__():35] meta init
+2022-09-02 19:00:05,977 DEBUG   HandlerThread:4037646 [meta.py:__init__():50] meta init done
+2022-09-02 19:00:05,977 DEBUG   HandlerThread:4037646 [meta.py:probe():216] probe
+2022-09-02 19:00:05,979 DEBUG   HandlerThread:4037646 [meta.py:_setup_git():206] setup git
+2022-09-02 19:00:05,997 DEBUG   HandlerThread:4037646 [meta.py:_setup_git():213] setup git done
+2022-09-02 19:00:05,997 DEBUG   HandlerThread:4037646 [meta.py:_save_pip():54] save pip
+2022-09-02 19:00:05,999 DEBUG   HandlerThread:4037646 [meta.py:_save_pip():68] save pip done
+2022-09-02 19:00:05,999 DEBUG   HandlerThread:4037646 [meta.py:_save_conda():75] save conda
+2022-09-02 19:00:06,878 INFO    Thread-12 :4037646 [dir_watcher.py:_on_file_created():275] file/dir created: /data/engs-oxfair3/bras5206/noisy-ZSC/tests/wandb/run-20220902_190005-r0uaa50y/files/wandb-summary.json
+2022-09-02 19:00:06,878 INFO    Thread-12 :4037646 [dir_watcher.py:_on_file_created():275] file/dir created: /data/engs-oxfair3/bras5206/noisy-ZSC/tests/wandb/run-20220902_190005-r0uaa50y/files/requirements.txt
+2022-09-02 19:00:06,879 INFO    Thread-12 :4037646 [dir_watcher.py:_on_file_created():275] file/dir created: /data/engs-oxfair3/bras5206/noisy-ZSC/tests/wandb/run-20220902_190005-r0uaa50y/files/conda-environment.yaml
