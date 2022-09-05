@@ -1,3 +1,3 @@
 from .DQNAgent import DeepQNetwork, DDQNAgent
-from .reply_memory import ReplayBuffer
+from .reply_memory import ReplayBuffer, EpisodeBuffer, RolloutBuffer
 from .DDRQNAgent import DDRQNAgent, DDRQNetwork
