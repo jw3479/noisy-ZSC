@@ -2,7 +2,7 @@
 
 #SBATCH --time=12:00:00
 #SBATCH --output=./logs/iql_%j.log
-#SBATCH --job-name=odql
+#SBATCH --job-name=ddrqn
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=2G
@@ -16,4 +16,4 @@ module load Anaconda3
 # Load conda environment
 source activate $HOME/.conda/envs/pytorch
 
-wandb agent jia_wan/noisy-ZSC-tests/i2hxbgb9
+wandb agent jia_wan/noisy-ZSC-tests/9ylmvlcm

@@ -4,7 +4,7 @@ from random import normalvariate
 
 
 class NoisyLeverGame:
-
+    
     def __init__(self, mean_payoffs, sigma, sigma1, sigma2, episode_length):
         self.mean_payoffs = mean_payoffs
         self.episode_length = episode_length

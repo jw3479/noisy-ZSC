@@ -14,8 +14,8 @@ import matplotlib.pyplot as plt
 # i.e. each agent treats partner as part of the environment
 # without reasoning about joint actions
 
-def convert_dec(myList):
-    return list(np.around(np.array(myList),2))
+#def convert_dec(myList):
+#    return list(np.around(np.array(myList),2))
 
 def run():
     wandb.init()
@@ -60,10 +60,13 @@ def run():
         while not done:
             obs1 = joint_obs[0]
             obs2 = joint_obs[1]
-            if episode < 5000:
-                epsilon_ = 1
-            else:
-                epsilon_ = 0
+            
+            # try first playing pure exploration (uniform) then best policy
+            #if episode < 5000:
+            #    epsilon_ = 1
+            #else:
+            #    epsilon_ = 0
+            
             action1 = agent1.choose_action(obs1, epsilon_)
             action2 = agent2.choose_action(obs2, epsilon_)
             if action1 == action2:

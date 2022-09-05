@@ -1,0 +1,42 @@
+program: test_DDRQN_IQL.py
+project: DDRQN-parameter-search
+entity: Jia
+method: random
+metric:
+  goal: maximize
+  name: reward
+name: DDRQN-random-sweep
+parameters:
+  episode_length:
+    values:
+      - 1
+      - 3
+      - 10
+      - 20 
+  eps_dec:
+    value: 0.00001
+  eps_min:
+    value: 0
+  epsilon:
+    value: 0.5
+  learning_rate:
+    distribution: log_uniform_values
+    min: 0.0001
+    max: 0.05
+  mem_size:
+    value: 32
+  batch_size:
+    value: 16
+  replace:
+    value: 50
+  sigma:
+    values:
+      - 50
+  tau:
+    values:
+      - 0.1
+      - 0.05
+      - 0.01
+      - 0.001
+      
+  

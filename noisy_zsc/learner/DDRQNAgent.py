@@ -86,20 +86,19 @@ class DDRQNAgent:
         chkpt_dir: directory for storing model checkpoint
     """
 
-    def __init__(self, q_eval: DDRQNetwork, gamma, epsilon, lr, n_actions, input_dims, mem_size,
+    def __init__(self, q_eval: DDRQNetwork, gamma, epsilon, n_actions, input_dims, mem_size,
                  batch_size, episode_length, eps_min = 0.01, eps_dec = 5e-5, replace = 1000,
-                 hidden_units=4, tau = 1.0):
+                 tau = 1.0):
 
         self.gamma = gamma
         self.epsilon = epsilon
-        self.lr = lr
         self.n_actions = n_actions
         self.input_dims = input_dims
         self.batch_size = batch_size
         self.eps_min = eps_min
         self.eps_dec = eps_dec
         self.replace_target_cnt = replace
-        self.hidden_units = hidden_units
+        
         self.tau = tau
         
         self.action_space = [i for i in range(self.n_actions)] # easier to parse actions
