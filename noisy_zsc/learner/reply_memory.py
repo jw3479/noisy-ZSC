@@ -73,7 +73,7 @@ class EpisodeBuffer():
         return states, actions, rewards, states_, dones
 
 
-class rolloutBuffer():
+class RolloutBuffer():
     # added: log_probs for Policy Gradient
     def __init__(self, max_size, input_shape, episode_length):
         self.mem_cnt = 0
@@ -111,5 +111,8 @@ class rolloutBuffer():
         log_probs = self.log_probs_memory[batch]
         return states, actions, rewards, states_, dones, log_probs
 
+
+    def rollout(self):
+        return self.state_memory, self.action_memory, self.log_probs_memory, self.reward_memory, self.terminal_memory 
 
 
