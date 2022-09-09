@@ -1,30 +1,48 @@
-import torch as T
+import gym
 import numpy as np
-from torch import nn
-import torch.nn.functional as F
-from torch.distributions import MultivariateNormal
+from noisy_zsc.learner.gen_PPO import Agent
 
-import torch.optim as optim
-import time
+if __name__ == '__main__':
+    env = gym.make('CartPole-v1')
+    N = 20
+    batch_size = 5
+    n_epochs = 4
+    alpha = 0.0003
+    agent = Agent(n_actions=env.action_space.n, batch_size=batch_size, 
+                    alpha=alpha, n_epochs=n_epochs, 
+                    input_dims=env.observation_space.shape)
+    n_games = 300
 
+    figure_file = 'plots/cartpole.png'
 
-def evaluate(self, batch_obs, batch_actions):
-        V = []
-        log_probs = []
+    best_score = env.reward_range[0]
+    score_history = []
 
-        for traj_index in range(self.mem_size):
-            traj_obs = batch_obs[traj_index]
-            traj_actions = batch_actions[traj_index]
-            traj_V = self.critic(T.tensor(traj_obs)).squeeze()
-            action_probs = F.softmax(self.actor.forward(T.tensor(traj_obs)),dim=0)
-            dist=T.distributions.categorical.Categorical(probs=action_probs)
-            traj_log_probs = dist.log_prob(T.tensor(traj_actions))
-            V.append(traj_V)
-            log_probs.append(traj_log_probs)
+    learn_iters = 0
+    avg_score = 0
+    n_steps = 0
 
-        return V, log_probs
+    for i in range(n_games):
+        observation = env.reset()
+        done = False
+        score = 0
+        while not done:
+            action, prob, val = agent.choose_action(observation)
+            observation_, reward, done, info = env.step(action)
+            n_steps += 1
+            score += reward
+            agent.remember(observation, action, prob, val, reward, done)
+            if n_steps % N == 0:
+                agent.learn()
+                learn_iters += 1
+            observation = observation_
+        score_history.append(score)
+        avg_score = np.mean(score_history[-100:])
 
+        if avg_score > best_score:
+            best_score = avg_score
+            agent.save_models()
 
-a = T.randn([2, 3]).unsqueeze(0)
-b = T.randn([2, 3]).unsqueeze(0)
-print(T.concat([a,b], dim = 0).shape)
+        print('episode', i, 'score %.1f' % score, 'avg score %.1f' % avg_score,
+                'time_steps', n_steps, 'learning_steps', learn_iters)
+    x = [i+1 for i in range(len(score_history))]
