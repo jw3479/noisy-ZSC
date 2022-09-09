@@ -1,63 +1,61 @@
 #%%
 from noisy_zsc.game import NoisyLeverGame
-from noisy_zsc.learner.PPOAgent import PPOAgent, PPONetwork
+from noisy_zsc.learner.PPOAgent import PPOAgent, ActorNetwork, CriticNetwork
 import torch as T
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Environment parameters
-mean_payoffs = [2., 4.]
-sigma = 0
+mean_payoffs = [500., 500., 500.]
+sigma = 100
 sigma1 = 0
 sigma2 = 0
-episode_length = 3
+episode_length = 1
 
+
+# hyper-parameters
+#lr = 0.005
+lr = 0.005
 
 # Initialize environment
 env = NoisyLeverGame(mean_payoffs, sigma, sigma1, sigma2, episode_length)
-actor_net = PPONetwork(lr=0.005, n_actions = 2, input_dims = env.obs_dim())
-ciritc_net = PPONetwork(lr=0.005, n_actions = 1, input_dims = env.obs_dim())
-agent = PPOAgent(actor = actor_net, critic=ciritc_net, gamma = 0.99, n_actions = env.obs_dim(), episode_length= episode_length)
+n_actions = len(env.mean_payoffs)
 
-epi_list = []
-loss_list = []
-reward_list = []
-for episode in range(100000):
-    epi_list.append(episode)
-    # Reset environment
+# actor: input observation, output probability of taking each action
+actor_net = ActorNetwork(lr=lr, output_dims=n_actions, input_dims=env.obs_dim())
+
+# critic: input observation, output current value function estimate
+critic_net = CriticNetwork(lr=lr, output_dims=1, input_dims=env.obs_dim())
+
+agent = PPOAgent(actor = actor_net, critic=critic_net, gamma = 0.99, n_actions = n_actions, 
+            input_dims = env.obs_dim(), mem_size = 1, episode_length= episode_length)
+
+for training_step in range(100000):
+    # fill up rollout buffer 
+    for episode in range(agent.mem_size):
+        obs, _ = env.reset()
+        for step in range(episode_length):
+            action2 = np.argmax(env.true_payoffs)
+            action1, log_prob = agent.choose_action(obs[0])
+            reward, done = env.step(action1,action2)
+            obs_ = env.get_obs()
+            agent.store_transition(obs[0], action1, reward, obs_[0], done, log_prob)
+            obs = obs_
+    
+    c_loss, a_loss = agent.learn()
+
     obs, _ = env.reset()
-    total_reward = 0
-    for step in range(3):
-        action2 = 0 if step < 2 else 1
-        action1 = agent.choose_action(obs[0])
-
+    # evaluate
+    cum_rew = 0
+    for step in range(episode_length):
+        action2 = np.argmax(env.true_payoffs)
+        #print(f'actor: {agent.actor(T.tensor(obs[0]))}')
+        action1, log_prob = agent.choose_action(obs[0])
         reward, done = env.step(action1,action2)
-
-        print(f"Reward: {reward:3.2f}, epsilon: {agent.epsilon}")
-        total_reward += reward
+        cum_rew += reward
         obs_ = env.get_obs()
-
-        agent.store_transition(obs[0], action1, reward, obs_[0], done)
-        loss1 = agent.learn()
-        if loss1 is None:
-            loss_list.append(0)
-        else:
-            loss_list.append(loss1.item())
-        
-        
-        # print(f'obs: {obs}, reward: {reward}, done: {done}')
+        #agent.store_transition(obs[0], action1, reward, obs_[0], done, log_prob)
         obs = obs_
-    reward_list.append(total_reward)
 
-
-    if episode % 50 == 0:
-        #plt.plot(epi_loss_list)
-        fig, (ax1, ax2) = plt.subplots(2)
-        ax1.scatter(epi_list, reward_list)
-        ax2.plot(loss_list)
-        #plt.semilogy()
-        #plt.show(block=False)
-        
-        plt.savefig("hi.png")
-        plt.close()
-
+    #print(f'{training_step} -- return: {cum_rew:3.0f} -- loss: ({c_loss:.3f},{a_loss:.3f})')
+    
