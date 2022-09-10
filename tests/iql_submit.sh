@@ -16,4 +16,4 @@ module load Anaconda3
 # Load conda environment
 source activate $HOME/.conda/envs/pytorch
 
-wandb agent jia_wan/noisy-ZSC-tests/9ylmvlcm
+wandb agent jia_wan/noisy-ZSC-tests/3efb21g8

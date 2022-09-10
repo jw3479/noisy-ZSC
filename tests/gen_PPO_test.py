@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 
 # Environment parameters
-mean_payoffs = [5., 5., 5., 5.]
+mean_payoffs = [5., 5., 5.]
 sigma = 2
 sigma1 = 0
 sigma2 = 0
@@ -64,7 +64,7 @@ for epi in range(n_games):
         score += reward
         agent.remember(obs[0], action, prob, val, reward, done)
         if n_steps % N == 0:
-            agent.learn()
+            agent.learn(0.01)
             learn_iters += 1
         obs = obs_
     

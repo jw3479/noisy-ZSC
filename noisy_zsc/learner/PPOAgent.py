@@ -122,7 +122,6 @@ class PPOAgent:
     def remember(self, state, action, probs, vals, reward, done):
         self.memory.store_memory(state, action, probs, vals, reward, done)
 
-    
 
     def choose_action(self, observation):
         state = T.tensor([observation], dtype=T.float).to(self.actor.device)
@@ -135,7 +134,7 @@ class PPOAgent:
 
         return action, probs, value
 
-    def learn(self):
+    def learn(self, ent_weight=0):
         for _ in range(self.n_epochs):
             state_arr, action_arr, old_prob_arr, vals_arr,\
             reward_arr, dones_arr, batches = \
@@ -161,6 +160,8 @@ class PPOAgent:
                 actions = T.tensor(action_arr[batch]).to(self.actor.device)
 
                 dist = self.actor(states)
+                ### add entropy term 
+                entropy = dist.entropy().mean()
                 critic_value = self.critic(states)
 
                 critic_value = T.squeeze(critic_value)
@@ -174,13 +175,18 @@ class PPOAgent:
                 actor_loss = -T.min(weighted_probs, weighted_clipped_probs).mean()
 
                 returns = advantage[batch] + values[batch]
+                
                 critic_loss = (returns-critic_value)**2
                 critic_loss = critic_loss.mean()
 
-                total_loss = actor_loss + 0.5*critic_loss
+                # add entropy to total loss
+                total_loss = actor_loss + 0.5*critic_loss - ent_weight * entropy
+
                 self.actor.optimizer.zero_grad()
                 self.critic.optimizer.zero_grad()
+                
                 total_loss.backward()
+                
                 self.actor.optimizer.step()
                 self.critic.optimizer.step()
                 #print(f"({actor_loss:.2f}, {critic_loss:.2f})")

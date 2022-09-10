@@ -13,11 +13,11 @@ from collections import deque
 def run():
     wandb.init()
     config = wandb.config
-    wandb.run.name = f"sigma={config.sigma}"
-    mean_payoffs = [5., 5., 5., 5.]
+    wandb.run.name = f"ent_w={config.ent_weight}"
+    mean_payoffs = [5., 5., 5.]
     sigma = config.sigma
-    sigma1 = 0
-    sigma2 = 0
+    sigma1 = config.sigma1
+    sigma2 = config.sigma2
     episode_length = 1
 
     # hyper-parameters
@@ -37,7 +37,7 @@ def run():
                         input_dims=obs_dim, policy_clip=clip)
     agent2 = deepcopy(agent1)
     
-    n_games = 100000
+    n_games = 500000
 
     n_steps = 0
     score_list = []
@@ -46,11 +46,13 @@ def run():
     epi_list = []
     # action buffer to interpret agent policies
     action_buffer = deque(maxlen = 100)
+    max_lever_buffer = deque(maxlen = 100)
 
     for epi in range(n_games):
         obs, _ = env.reset()
         done = False
         score = 0
+        max_lever = -1
 
         while not done:
             
@@ -60,8 +62,13 @@ def run():
             # add actions to action_buffer 
             if action1 == action2:
                 action_buffer.append(action1)
+                max_lever = 1 if action1 == np.argmax(env.true_payoffs) else 0 
             else:
                 action_buffer.append(-1)
+                max_lever = 0
+
+            max_lever_buffer.append(max_lever)
+            
             
             reward, done = env.step(action1, action2)
 
@@ -73,9 +80,8 @@ def run():
             agent2.remember(obs[1], action2, prob, val, reward, done)
 
             if n_steps % N == 0:
-                agent1.learn()
-                agent2.learn()
-
+                agent1.learn(ent_weight=config.ent_weight)
+                agent2.learn(ent_weight=config.ent_weight)
             obs = obs_
         
         score_list.append(score)
@@ -86,7 +92,9 @@ def run():
             "prop_1": sum(1 for a in action_buffer if a == 0) / len(action_buffer),
             "prop_2": sum(1 for a in action_buffer if a == 1) / len(action_buffer),
             "prop_3": sum(1 for a in action_buffer if a == 2) / len(action_buffer),
-            "prop_NA": sum(1 for a in action_buffer if a == -1) / len(action_buffer)}   
+            "prop_NA": sum(1 for a in action_buffer if a == -1) / len(action_buffer),
+            # number of max lever pulled in last 100 steps
+            "max_lever": sum(1 for i in max_lever_buffer if i == 1) / len(max_lever_buffer)}   
         wandb.log(stats)
 
 
