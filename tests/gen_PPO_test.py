@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 # Environment parameters
 mean_payoffs = [5., 5., 5., 5.]
-sigma = 1
+sigma = 2
 sigma1 = 0
 sigma2 = 0
 episode_length = 1
