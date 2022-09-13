@@ -11,7 +11,7 @@ from copy import deepcopy
 import random
 
 import numpy as np
-from .reply_memory import EpisodeBuffer, ReplayBuffer
+from .replay_memory import EpisodeBuffer, ReplayBuffer
 import os
 
 

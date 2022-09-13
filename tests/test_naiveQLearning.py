@@ -1,3 +1,9 @@
+### SUMMARY ###
+# testing vanilla single-agent Q-learning with double DQN learning (assume agent 2 always just play the optimal lever;
+# the game is now equivalent to agent1 selecting the lever with maximum value)
+
+# test to see that the Q-values are correct
+
 #%%
 import torch as T
 import numpy as np
@@ -8,16 +14,11 @@ from noisy_zsc.game import NoisyLeverGame
 from noisy_zsc.learner import DDQNAgent
 import matplotlib.pyplot as plt
 
-# testing vanilla single-agent Q-learning with double DQN learning (assume agent 2 always just play the optimal lever;
-# the game is now equivalent to agent1 selecting the lever with maximum value)
-
-# test to see that the Q-values are correct
-
 def convert_dec(myList):
     return list(np.around(np.array(myList),2))
 
 def run():
-    # lever game with noisy true-lever game (gaussianm noise)
+    # lever game with noisy true-lever game (gaussian noise)
     game = NoisyLeverGame(
         mean_payoffs=[2., 2., 2.],
         sigma=0.5,

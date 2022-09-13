@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 import numpy as np
-from .reply_memory import ReplayBuffer
+from .replay_memory import ReplayBuffer
 import argparse, os
 from copy import deepcopy
 import random

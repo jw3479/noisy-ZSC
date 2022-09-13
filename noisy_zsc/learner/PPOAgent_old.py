@@ -4,7 +4,7 @@ import numpy as np
 from torch import nn
 import torch.nn.functional as F
 from torch.distributions import MultivariateNormal
-from .reply_memory import RolloutBuffer
+from .replay_memory import RolloutBuffer
 import torch.optim as optim
 import time
 

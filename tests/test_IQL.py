@@ -1,3 +1,7 @@
+# testing vanilla independent Q-learning (IQL) with double DQN learning
+# i.e. each agent treats partner as part of the environment
+# without reasoning about joint actions
+
 #%%
 import torch as T
 import numpy as np
@@ -7,10 +11,6 @@ import random
 from noisy_zsc.game import NoisyLeverGame
 from noisy_zsc.learner import DDQNAgent
 import matplotlib.pyplot as plt
-
-# testing vanilla independent Q-learning (IQL) with double DQN learning
-# i.e. each agent treats partner as part of the environment
-# without reasoning about joint actions
 
 def convert_dec(myList):
     return list(np.around(np.array(myList),2))
