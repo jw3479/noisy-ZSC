@@ -129,6 +129,7 @@ def run():
              
         wandb.log(stats)
 
+"""
     df = pd.DataFrame({
         'true_max': true_max,
         'E1_max': E1_max,
@@ -137,9 +138,10 @@ def run():
         'E2_val': E2_val,
         'reward_list': reward_list})
 
-    filename = f'save_run/sigma1_{config.sigma1:.3f}_sigma2_{config.sigma2:.3f}.csv'
-    print("saving "+ filename)
-    df.to_csv(filename, encoding='utf-8', index=False)
+"""
+    #filename = f'save_run/sigma1_{config.sigma1:.3f}_sigma2_{config.sigma2:.3f}.csv'
+    #print("saving "+ filename)
+    #df.to_csv(filename, encoding='utf-8', index=False)
 
 
 if __name__ == '__main__':
