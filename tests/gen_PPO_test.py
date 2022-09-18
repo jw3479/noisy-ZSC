@@ -1,4 +1,5 @@
 from noisy_zsc.game import NoisyLeverGame
+from noisy_zsc.game import NoisyBailLeverGame
 from noisy_zsc.learner.PPOAgent import PPOAgent
 import torch as T
 import numpy as np
@@ -6,8 +7,9 @@ import matplotlib.pyplot as plt
 
 
 # Environment parameters
-mean_payoffs = [5., 5., 5.]
-sigma = 2
+mean_payoffs = [2., 2., 2.]
+bail_payoff = 3.
+sigma = 0.5
 sigma1 = 0
 sigma2 = 0
 episode_length = 1
@@ -24,8 +26,8 @@ batch_size = 64
 
 
 # Initialize environment
-env = NoisyLeverGame(mean_payoffs, sigma, sigma1, sigma2, episode_length)
-n_actions = len(env.mean_payoffs)
+env = NoisyBailLeverGame(mean_payoffs, bail_payoff, sigma, sigma1, sigma2, episode_length)
+n_actions = len(env.true_payoffs)
 obs_dim = env.obs_dim()
 
 agent = PPOAgent(n_actions=n_actions, batch_size=batch_size, 

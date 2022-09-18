@@ -1,3 +1,10 @@
+# sweep different set of values for sigma1 and sigma2
+# save all networks for cross-play comparison 
+# pick 20 random seeds for each run
+
+
+# sanity check befor proceeding to sigma sweeps
+# set sigma1=sigma2=0, make sure IPPO can converge to argmax policy
 # Independent PPO
 # both agents learn with PPO 
 # note that the performance is very sensitive to hyperparameters and scale of the rewards
@@ -5,8 +12,9 @@
 # wandb logs agent strategies in the last 100 steps and how many hits at 
 # max lever in the last 100 steps
 
-from noisy_zsc.game import NoisyLeverGame
+
 from noisy_zsc.game import NoisyBailLeverGame
+from noisy_zsc.heuristic_learner import ArgmaxAgent, Argmaxof2Agent, StubbornAgent, argmax_of_2
 from noisy_zsc.learner.PPOAgent import PPOAgent
 import torch as T
 import numpy as np
@@ -17,6 +25,26 @@ import random
 from collections import deque
 import pandas as pd
 import csv
+
+
+def argmax_score(payoffs1, payoffs2, true_payoff):
+    action1 = np.argmax(payoffs1)
+    action2 = np.argmax(payoffs2)
+    if action1 == action2:
+        return true_payoff[action1]
+    else:
+        return 0
+
+def argmax_of_2_score(payoffs1, payoffs2, true_payoff):
+    action1 = np.argmax(payoffs1[1:])
+    action2 = np.argmax(payoffs2[1:])
+    if action1 == action2:
+        return true_payoff[action1+1]
+    else:
+        return 0
+
+def stubborn_score(true_payoff):
+    return true_payoff[2]
 
 def run():
     wandb.init()
@@ -45,13 +73,23 @@ def run():
                         input_dims=obs_dim, policy_clip=clip)
     agent2 = deepcopy(agent1)
     
-    n_games = 500000
+    n_games = 300000
 
     n_steps = 0
     
     score_list = []
     avg_score = 0
-    loss_list = []
+
+    # heuristic scores
+    # argmax
+    argmax_score_list = []
+
+    # argmax_of_2 scores
+    argmax_of_2_list= []
+
+    # stubborn scores
+    stubborn_list = []
+
     epi_list = []
 
     # track the maximum value in true game, E1 and E2
@@ -80,6 +118,10 @@ def run():
         max_lever = -1
         bail = -1
         epi_list.append(epi)
+
+        argmax_score_list.append(argmax_score(env.payoffs1, env.payoffs2, env.true_payoffs))
+        argmax_of_2_list.append(argmax_of_2_score(env.payoffs1, env.payoffs2, env.true_payoffs))
+        stubborn_list.append(stubborn_score(env.true_payoffs))
 
         while not done:
             
@@ -122,9 +164,18 @@ def run():
             obs = obs_
         
         score_list.append(score)
+
+        
         avg_score = np.mean(score_list[-100:])
+        avg_argmax_score = np.mean(argmax_score_list[-100:])
+        avg_argmax_of_2_score = np.mean(argmax_of_2_list[-100:])
+        avg_stubborn_score = np.mean(stubborn_list[-100:])
+
         stats = {
             "avg_score": avg_score,
+            "avg_argmax_score": avg_argmax_score,
+            "avg_argmax_of_2_score": avg_argmax_of_2_score,
+            "avg_stubborn_score": avg_stubborn_score,
             "reward": score / (env.episode_length * max(env.true_payoffs)),
             "prop_1": sum(1 for a in action_buffer if a == 0) / len(action_buffer),
             "prop_2": sum(1 for a in action_buffer if a == 1) / len(action_buffer),
@@ -135,17 +186,6 @@ def run():
             "bail": sum(1 for i in bail_buffer if i == 1) / len(bail_buffer)} 
              
         wandb.log(stats)
-
-"""
-    df = pd.DataFrame({
-        'true_max': true_max,
-        'E1_max': E1_max,
-        'E1_val': E1_val,
-        'E2_max': E2_max,
-        'E2_val': E2_val,
-        'reward_list': reward_list})
-
-"""
 
 
 if __name__ == '__main__':
