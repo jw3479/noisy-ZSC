@@ -3,6 +3,7 @@ import numpy as np
 import torch as T
 import torch.nn as nn
 import torch.optim as optim
+from typing import Dict, List, Optional, Tuple
 from torch.distributions.categorical import Categorical
 
 class PPOMemory:
@@ -49,10 +50,10 @@ class PPOMemory:
 
 class ActorNetwork(nn.Module):
     def __init__(self, n_actions, input_dims, alpha,
-            fc1_dims=256, fc2_dims=256, chkpt_dir='tmp/ppo'):
+            fc1_dims=64, fc2_dims=64, chkpt_dir='models'):
         super(ActorNetwork, self).__init__()
 
-        self.checkpoint_file = os.path.join(chkpt_dir, 'actor_torch_ppo')
+        self.checkpoint_file = chkpt_dir
         self.actor = nn.Sequential(
                 nn.Linear(input_dims, fc1_dims),
                 nn.ReLU(),
@@ -73,17 +74,17 @@ class ActorNetwork(nn.Module):
         return dist
 
     def save_checkpoint(self):
-        T.save(self.state_dict(), self.checkpoint_file)
+        T.save(self.state_dict(),self.checkpoint_file)
 
     def load_checkpoint(self):
         self.load_state_dict(T.load(self.checkpoint_file))
 
 class CriticNetwork(nn.Module):
-    def __init__(self, input_dims, alpha, fc1_dims=256, fc2_dims=256,
-            chkpt_dir='tmp/ppo'):
+    def __init__(self, input_dims, alpha, fc1_dims=64, fc2_dims=64,
+            chkpt_dir='models'):
         super(CriticNetwork, self).__init__()
 
-        self.checkpoint_file = os.path.join(chkpt_dir, 'critic_torch_ppo')
+        self.checkpoint_file = chkpt_dir
         self.critic = nn.Sequential(
                 nn.Linear(input_dims, fc1_dims),
                 nn.ReLU(),
@@ -114,6 +115,9 @@ class PPOAgent:
         self.policy_clip = policy_clip
         self.n_epochs = n_epochs
         self.gae_lambda = gae_lambda
+        self.n_actions = n_actions
+        self.input_dims = input_dims
+        self.alpha = alpha
 
         self.actor = ActorNetwork(n_actions, input_dims, alpha)
         self.critic = CriticNetwork(input_dims, alpha)
@@ -192,3 +196,34 @@ class PPOAgent:
                 #print(f"({actor_loss:.2f}, {critic_loss:.2f})")
 
         self.memory.clear_memory()        
+
+    def reset(self, actor_state_dict: Optional[Dict]=None, critic_state_dict: Optional[Dict]=None):
+        """
+        Resets the agent (memory, actor, critic)
+        If 'params' is non-empty, the passed parameters are cloned into the policy network
+        """
+        if actor_state_dict is not None:
+            self.actor.load_state_dict(actor_state_dict)
+        
+        if critic_state_dict is not None:
+            self.actor.load_state_dict(critic_state_dict)
+        
+        # reset optimizer
+        self.actor.optimizer = optim.Adam(self.actor.parameters(), lr=self.alpha)
+        self.critic.optimizer = optim.Adam(self.critic.parameters(), lr=self.alpha)
+
+
+    def save_models(self, actor_dir, critic_dir):
+        print('... saving models ...')
+        T.save(self.actor.state_dict(), actor_dir)        
+        T.save(self.critic.state_dict(), critic_dir)
+
+        
+
+    def load_models(self, actor_dir, critic_dir):
+        if actor_dir is not None and critic_dir is not None:
+            self.actor = ActorNetwork(self.n_actions, self.input_dims, self.alpha)
+            self.actor.load_state_dict(T.load(actor_dir))
+
+            self.critic = CriticNetwork(self.input_dims, self.alpha)
+            self.critic.load_state_dict(T.load(critic_dir))

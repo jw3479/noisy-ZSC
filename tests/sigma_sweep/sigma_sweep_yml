@@ -1,27 +1,13 @@
 program: sigma_sweep.py
-project: ippo_zero_noise
+project: 
 entity: Jia
-method: random
+method: grid
 metric:
   goal: maximize
-  name: reward
-name: ippo_zero_noise 
+  name: grid
+name: ippo_xplay
 parameters:
-  bail_payoff:
-    value: 5.0
-  sigma:
-    value: 5.0
-  sigma1:
-    values: 
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-  sigma2:
+  seed:
     values:
       - 0
       - 1
@@ -31,6 +17,21 @@ parameters:
       - 5
       - 6
       - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+  bail_payoff:
+    value: 5.0
+  sigma:
+    value: 5.0
+  sigma1:
+    value: 1 
+  sigma2:
+    value: 1
   learning_rate:
     value: 0.00024
   clip:
@@ -38,6 +39,4 @@ parameters:
   n_epochs:
     value: 10
   ent_weight:
-    values: 
-      - 0.1
-      - 0.01
+    value: 0.01

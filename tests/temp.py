@@ -1,17 +1,41 @@
-from ast import arg
+from noisy_zsc.game import NoisyLeverGame
+from noisy_zsc.game import NoisyBailLeverGame
+from noisy_zsc.learner.PPOAgent import PPOAgent
+import torch as T
 import numpy as np
+import matplotlib.pyplot as plt
+import os
 
 
-def argmax_of_2_score(payoffs1, payoffs2, true_payoff):
-    action1 = np.argmax(payoffs1[1:])
-    action2 = np.argmax(payoffs2[1:])
-    if action1 == action2:
-        return true_payoff[action1+1]
-    else:
-        return 0
+# Environment parameters
+mean_payoffs = [2., 2., 2.]
+bail_payoff = 3.
+sigma = 0.5
+sigma1 = 0
+sigma2 = 0
+episode_length = 1
 
-true_payoff = [7,4,5,6]
-payoffs1 = true_payoff
-payoffs2 = true_payoff
 
-print(argmax_of_2_score(payoffs1, payoffs2, true_payoff))
+# hyper-parameters
+#lr = 0.005
+lr = 0.0003
+n_epochs = 10 # 3-10
+clip = 0.2 # typical 0.1-0.3
+N = 20
+
+batch_size = 64
+
+
+# Initialize environment
+env = NoisyBailLeverGame(mean_payoffs, bail_payoff, sigma, sigma1, sigma2, episode_length)
+n_actions = len(env.true_payoffs)
+obs_dim = env.obs_dim()
+#cur_path = os.getcwd()
+actor_chkpt = 'models/actor_'+str(env.sigma1)
+critic_chkpt = 'models/critic_'+str(env.sigma1)
+
+agent = PPOAgent(n_actions=n_actions, batch_size=batch_size, 
+                    alpha=lr, n_epochs=n_epochs, 
+                    input_dims=obs_dim)
+
+agent.load_models(actor_chkpt, critic_chkpt)

@@ -49,7 +49,13 @@ def stubborn_score(true_payoff):
 def run():
     wandb.init()
     config = wandb.config
-    wandb.run.name = f"sigma1={config.sigma1}-sigma2={config.sigma2}-bail={config.bail_payoff}"
+    wandb.run.name = f"sigma1={config.sigma1}-sigma2={config.sigma2}-seed{config.seed}"
+    
+    # Reproducible results
+    random.seed(config.seed)
+    np.random.seed(config.seed)
+    T.manual_seed(config.seed)
+    
     mean_payoffs = [5., 5., 5.]
     bail_payoff = config.bail_payoff
     sigma = config.sigma
@@ -73,7 +79,7 @@ def run():
                         input_dims=obs_dim, policy_clip=clip)
     agent2 = deepcopy(agent1)
     
-    n_games = 300000
+    n_games = 1000000
 
     n_steps = 0
     
@@ -164,17 +170,16 @@ def run():
             obs = obs_
         
         score_list.append(score)
-
+        
         
         avg_score = np.mean(score_list[-100:])
         avg_argmax_score = np.mean(argmax_score_list[-100:])
-        avg_argmax_of_2_score = np.mean(argmax_of_2_list[-100:])
+        
         avg_stubborn_score = np.mean(stubborn_list[-100:])
 
         stats = {
             "avg_score": avg_score,
             "avg_argmax_score": avg_argmax_score,
-            "avg_argmax_of_2_score": avg_argmax_of_2_score,
             "avg_stubborn_score": avg_stubborn_score,
             "reward": score / (env.episode_length * max(env.true_payoffs)),
             "prop_1": sum(1 for a in action_buffer if a == 0) / len(action_buffer),
@@ -186,7 +191,10 @@ def run():
             "bail": sum(1 for i in bail_buffer if i == 1) / len(bail_buffer)} 
              
         wandb.log(stats)
-
+    actor_chkpt = f"models/actor_sigma1{env.sigma1}_sigma2{env.sigma2}_seed{config.seed}_"
+    critic_chkpt = f"models/critic_sigma1{env.sigma1}_sigma2{env.sigma2}_seed{config.seed}_"
+    agent1.save_models(actor_chkpt+"1", critic_chkpt+"1")
+    agent2.save_models(actor_chkpt+"2", critic_chkpt+"2")
 
 if __name__ == '__main__':
     #random.seed(42)
