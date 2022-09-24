@@ -1,0 +1,446 @@
+wandb: Starting wandb agent 🕵️
+2022-09-23 12:29:17,431 - wandb.wandb_agent - INFO - Running runs: []
+2022-09-23 12:29:21,832 - wandb.wandb_agent - INFO - Agent received command: run
+2022-09-23 12:29:21,832 - wandb.wandb_agent - INFO - Agent starting run with config:
+	bail_payoff: 5
+	clip: 0.2
+	ent_weight: 0.01
+	learning_rate: 0.00024
+	n_epochs: 10
+	seed: 1
+	sigma: 5
+	sigma12: 4
+2022-09-23 12:29:21,898 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sigma_sweep.py --bail_payoff=5 --clip=0.2 --ent_weight=0.01 --learning_rate=0.00024 --n_epochs=10 --seed=1 --sigma=5 --sigma12=4
+2022-09-23 12:29:26,908 - wandb.wandb_agent - INFO - Running runs: ['4ld2aews']
+wandb: Currently logged in as: jia_wan. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.13.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.13.2
+wandb: Run data is saved locally in /data/engs-oxfair3/bras5206/noisy-ZSC/tests/sigma_sweep/wandb/run-20220923_122928-4ld2aews
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run fluent-sweep-11
+wandb: ⭐️ View project at https://wandb.ai/jia_wan/noisy-ZSC-tests
+wandb: 🧹 View sweep at https://wandb.ai/jia_wan/noisy-ZSC-tests/sweeps/nb9jyhvg
+wandb: 🚀 View run at https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/4ld2aews
+... saving models ...
+... saving models ...
+2022-09-23 13:09:57,643 - wandb.wandb_agent - INFO - Cleaning up finished run: 4ld2aews
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.002 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:   avg_argmax_score ▅▄▃▁▂▄▇▆▅▆▅▃▇▇▆▅▄▄▆▇▅█▄▃▅▃▅▃▅▄▅▇▆▆▄█▄▅▃▄
+wandb:          avg_score ▁▅▂▅▅▃▄▆▄▆▅▃▆▆▄▆▅▆▅█▅▇▄▅▆▄▆▅▆▄▆▇▅▆▄█▇▄▅▅
+wandb: avg_stubborn_score ▃▃▃▂▂▄▅█▄▇▅▃▅▆▆▃▁▄▅▅▄▆▅▂▅▃▅▄▄▄▃▄▅▅▂▁▇▆▂▁
+wandb:               bail ▆█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:          max_lever ▁▅▂▄▃▃▃▃▂▃▅▃▆▅▂▆▅▄▅▅▆▇▄▆▄▅▆▄▅▅▆▇▃▅▄█▅▅▆▆
+wandb:             prop_1 ▄▆▅█▇▇███▇▆▄▄▃▁▃▅▆▂▃▄▄▃▃▄▄▃▃▂▃▄▅▆▅▄▅▅▄▄▃
+wandb:             prop_2 ▁▁▁▁▁▁▁▁▁▁▂▃▃▄█▅▂▂▆▇▃▄▄▄▃▂▅▄▆▄▃▃▂▂▃▃▃▃▃▄
+wandb:             prop_3 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:            prop_NA █▄▇▂▃▃▁▁▁▂▄▆▅▄▃▅▄▃▅▂▅▄▆▅▄▅▄▆▄▆▄▃▄▄▅▄▃▅▅▅
+wandb:             reward ▄▄▄▇██▆█▁▃██▇▄▇███▄▄█▇▄▇▇▄▄▄████▄▇▄▇▄▇▄▄
+wandb: 
+wandb: Run summary:
+wandb:   avg_argmax_score 4.11788
+wandb:          avg_score 5.66057
+wandb: avg_stubborn_score 4.8651
+wandb:               bail 0.0
+wandb:          max_lever 0.44
+wandb:             prop_1 0.38
+wandb:             prop_2 0.29
+wandb:             prop_3 0.0
+wandb:            prop_NA 0.33
+wandb:             reward 0.0
+wandb: 
+wandb: Synced fluent-sweep-11: https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/4ld2aews
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20220923_122928-4ld2aews/logs
+2022-09-23 13:12:21,595 - wandb.wandb_agent - INFO - Agent received command: run
+2022-09-23 13:12:21,596 - wandb.wandb_agent - INFO - Agent starting run with config:
+	bail_payoff: 5
+	clip: 0.2
+	ent_weight: 0.01
+	learning_rate: 0.00024
+	n_epochs: 10
+	seed: 3
+	sigma: 5
+	sigma12: 2
+2022-09-23 13:12:21,673 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sigma_sweep.py --bail_payoff=5 --clip=0.2 --ent_weight=0.01 --learning_rate=0.00024 --n_epochs=10 --seed=3 --sigma=5 --sigma12=2
+2022-09-23 13:12:26,686 - wandb.wandb_agent - INFO - Running runs: ['gs86mec6']
+wandb: Currently logged in as: jia_wan. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.13.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.13.2
+wandb: Run data is saved locally in /data/engs-oxfair3/bras5206/noisy-ZSC/tests/sigma_sweep/wandb/run-20220923_131228-gs86mec6
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run crimson-sweep-24
+wandb: ⭐️ View project at https://wandb.ai/jia_wan/noisy-ZSC-tests
+wandb: 🧹 View sweep at https://wandb.ai/jia_wan/noisy-ZSC-tests/sweeps/nb9jyhvg
+wandb: 🚀 View run at https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/gs86mec6
+... saving models ...
+... saving models ...
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:   avg_argmax_score ▅▆▅▁▅▃▁▆▃▅▃█▄█▂▆▁█▂▇▅▃▅▄▃▆▃▃▄▅▆▇▆▄▄▂▃▆▆▅
+wandb:          avg_score ▁▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▅▆▅▄▆▅▅▅█▆▅▇█▄▇▆█▅▆█▆
+wandb: avg_stubborn_score ▅▃▆▂▃▃▄▂█▅▃▆▆▇▄▅▃▃▇▅▃▃▃▄▃▅▃▇▆▄▅▄▃▄▁▅▇▃▅▇
+wandb:               bail ▇██████████████████▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:          max_lever ▁▂▂▂▂▂▂▂▂▂▃▂▂▂▃▁▂▂▁▅▇▆▅▇▆▇▆▇▇▆▆▇▆▇▆█▆▆▇▇
+wandb:             prop_1 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂█▅▅▆▄▅▆▄▅▇▅█▅▇▇▆▆▅▅▄
+wandb:             prop_2 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:             prop_3 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁█▄▆▅▅▆▅▅▇▆▅▅▅▅▅▄▅▅▆▆▆
+wandb:            prop_NA ▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▆▇▇█▇▆▇▇▄▇▅█▃▇▆▆▅▇▄▄▇
+wandb:             reward ▅▅▆▃█▆▄█▄█▅▆▄██▃█▄▄█▅▁█▂▂█▇▁▁▇██▂██▁█▅█▃
+wandb: 
+wandb: Run summary:
+wandb:   avg_argmax_score 6.77585
+wandb:          avg_score 6.88262
+wandb: avg_stubborn_score 4.66053
+wandb:               bail 0.0
+wandb:          max_lever 0.54
+wandb:             prop_1 0.31
+wandb:             prop_2 0.0
+wandb:             prop_3 0.55
+wandb:            prop_NA 0.14
+wandb:             reward 0.28299
+wandb: 
+wandb: Synced crimson-sweep-24: https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/gs86mec6
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20220923_131228-gs86mec6/logs
+2022-09-23 13:56:45,583 - wandb.wandb_agent - INFO - Cleaning up finished run: gs86mec6
+2022-09-23 13:56:45,808 - wandb.wandb_agent - INFO - Agent received command: run
+2022-09-23 13:56:45,808 - wandb.wandb_agent - INFO - Agent starting run with config:
+	bail_payoff: 5
+	clip: 0.2
+	ent_weight: 0.01
+	learning_rate: 0.00024
+	n_epochs: 10
+	seed: 5
+	sigma: 5
+	sigma12: 1
+2022-09-23 13:56:45,814 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sigma_sweep.py --bail_payoff=5 --clip=0.2 --ent_weight=0.01 --learning_rate=0.00024 --n_epochs=10 --seed=5 --sigma=5 --sigma12=1
+2022-09-23 13:56:50,829 - wandb.wandb_agent - INFO - Running runs: ['e3sh082j']
+wandb: Currently logged in as: jia_wan. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.13.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.13.2
+wandb: Run data is saved locally in /data/engs-oxfair3/bras5206/noisy-ZSC/tests/sigma_sweep/wandb/run-20220923_135651-e3sh082j
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run happy-sweep-37
+wandb: ⭐️ View project at https://wandb.ai/jia_wan/noisy-ZSC-tests
+wandb: 🧹 View sweep at https://wandb.ai/jia_wan/noisy-ZSC-tests/sweeps/nb9jyhvg
+wandb: 🚀 View run at https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/e3sh082j
+... saving models ...
+... saving models ...
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.006 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:   avg_argmax_score ▇▇▄▃▄▃▃▅▆▅▃▅▆▇▁▆▅▃▄▆▅▆▂▆▄▆▆▅▁▆▇▂█▇▇▄▄▅▂▆
+wandb:          avg_score ▁▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▁▃▃▃▂▄▃█▅▅▆▆▆▆▆▅▆▆▆▆▅
+wandb: avg_stubborn_score ▁▅▃▃▅▆▁█▆▅▆▅▃▃▃▇▅▅▇▃▅▆▃▂▄▇▇▅▁▆▂▂▃▄▄▄▃▃▂▁
+wandb:               bail ▅██████████████████▆███▆▆▂▁▄▃▃▂▁▁▄▂▂▄▂▃▃
+wandb:          max_lever ▂▂▂▂▃▁▂▂▂▂▂▂▂▂▂▂▁▂▂▂▂▂▃▃▄▄█▆▆▆▅▆▅▆▅▅▆▆▆▅
+wandb:             prop_1 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:             prop_2 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁█▁▁▁▁▁▁▁▁▁▁▁
+wandb:             prop_3 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▃▄█▄▅▅▇██▅▆▆▄▇▆▅
+wandb:            prop_NA ▆▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▆▁▁▁▃▃█▂▄▃▄▂▂▂▃▄▃▂▃▂▃
+wandb:             reward ▂█▃▂▃▆▁▄▃█▁█▄▃▃█▄▇▇▁█▄█▃█▃▂█▂▂▅▇▅▁█▄▆█▂█
+wandb: 
+wandb: Run summary:
+wandb:   avg_argmax_score 8.04774
+wandb:          avg_score 6.52909
+wandb: avg_stubborn_score 4.86797
+wandb:               bail 0.43
+wandb:          max_lever 0.28
+wandb:             prop_1 0.0
+wandb:             prop_2 0.0
+wandb:             prop_3 0.45
+wandb:            prop_NA 0.12
+wandb:             reward 0.86953
+wandb: 
+wandb: Synced happy-sweep-37: https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/e3sh082j
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20220923_135651-e3sh082j/logs
+2022-09-23 14:41:33,062 - wandb.wandb_agent - INFO - Cleaning up finished run: e3sh082j
+2022-09-23 14:41:33,363 - wandb.wandb_agent - INFO - Agent received command: run
+2022-09-23 14:41:33,363 - wandb.wandb_agent - INFO - Agent starting run with config:
+	bail_payoff: 5
+	clip: 0.2
+	ent_weight: 0.01
+	learning_rate: 0.00024
+	n_epochs: 10
+	seed: 5
+	sigma: 5
+	sigma12: 8
+2022-09-23 14:41:33,446 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sigma_sweep.py --bail_payoff=5 --clip=0.2 --ent_weight=0.01 --learning_rate=0.00024 --n_epochs=10 --seed=5 --sigma=5 --sigma12=8
+2022-09-23 14:41:38,458 - wandb.wandb_agent - INFO - Running runs: ['1rfa6whz']
+wandb: Currently logged in as: jia_wan. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.13.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.13.2
+wandb: Run data is saved locally in /data/engs-oxfair3/bras5206/noisy-ZSC/tests/sigma_sweep/wandb/run-20220923_144141-1rfa6whz
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run copper-sweep-41
+wandb: ⭐️ View project at https://wandb.ai/jia_wan/noisy-ZSC-tests
+wandb: 🧹 View sweep at https://wandb.ai/jia_wan/noisy-ZSC-tests/sweeps/nb9jyhvg
+wandb: 🚀 View run at https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/1rfa6whz
+... saving models ...
+... saving models ...
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:   avg_argmax_score ▇▇▄▄▅▄▄▆▆▅▃▅▄▇▅▅▅█▆█▆▇▄▅█▃▅▆▁▇▃▅▇▆▇▂▃▃▃▆
+wandb:          avg_score ▁▇▇▇▇▇▇█▇▇▇▆▆▆▆▇▇▆█▆▇▇▆▆▆▇█▇▅▇▆▆▆▇▆▆▆▆▆▅
+wandb: avg_stubborn_score ▁▅▃▃▅▆▁█▆▅▆▅▃▃▃▇▅▅▇▃▅▆▃▂▄▇▇▅▁▆▂▂▃▄▄▄▃▃▂▁
+wandb:               bail ▁▁█████▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:          max_lever ▁▆▃▃▄▂▃▇▆▆▆▅▅▅▆▇▅▅▇▅▆▆▇▅▅▆█▆▆▅▅▆▅▆▅▅▆▅▆▄
+wandb:             prop_1 ▁█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:             prop_2 ▄▁▁▁▁▁▁▁▁▁▁▁▁█▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:             prop_3 ▁▁▁▁▁▁▁█▇██▇█▆▆▇▇▇█▇███▇▇███████▇▇█████▇
+wandb:            prop_NA █▂▁▁▁▁▁▁▂▁▂▂▂▃▃▃▂▂▁▂▂▁▁▂▃▂▁▂▂▂▂▂▃▂▂▂▂▂▂▂
+wandb:             reward ▃▆▆▅▆▇▅▅▄▅▅▅▅█▅▅▇▅█▂█▅▅█▃▆▅█▅▆▇█▄▅▁▆▄█▅█
+wandb: 
+wandb: Run summary:
+wandb:   avg_argmax_score 4.53941
+wandb:          avg_score 4.3433
+wandb: avg_stubborn_score 4.86797
+wandb:               bail 0.0
+wandb:          max_lever 0.21
+wandb:             prop_1 0.0
+wandb:             prop_2 0.0
+wandb:             prop_3 0.9
+wandb:            prop_NA 0.1
+wandb:             reward -0.46372
+wandb: 
+wandb: Synced copper-sweep-41: https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/1rfa6whz
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20220923_144141-1rfa6whz/logs
+2022-09-23 15:25:19,666 - wandb.wandb_agent - INFO - Cleaning up finished run: 1rfa6whz
+2022-09-23 15:25:19,938 - wandb.wandb_agent - INFO - Agent received command: run
+2022-09-23 15:25:19,938 - wandb.wandb_agent - INFO - Agent starting run with config:
+	bail_payoff: 5
+	clip: 0.2
+	ent_weight: 0.01
+	learning_rate: 0.00024
+	n_epochs: 10
+	seed: 8
+	sigma: 5
+	sigma12: 0
+2022-09-23 15:25:19,967 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sigma_sweep.py --bail_payoff=5 --clip=0.2 --ent_weight=0.01 --learning_rate=0.00024 --n_epochs=10 --seed=8 --sigma=5 --sigma12=0
+2022-09-23 15:25:24,980 - wandb.wandb_agent - INFO - Running runs: ['umtuh7e3']
+wandb: Currently logged in as: jia_wan. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.13.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.13.2
+wandb: Run data is saved locally in /data/engs-oxfair3/bras5206/noisy-ZSC/tests/sigma_sweep/wandb/run-20220923_152527-umtuh7e3
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run decent-sweep-56
+wandb: ⭐️ View project at https://wandb.ai/jia_wan/noisy-ZSC-tests
+wandb: 🧹 View sweep at https://wandb.ai/jia_wan/noisy-ZSC-tests/sweeps/nb9jyhvg
+wandb: 🚀 View run at https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/umtuh7e3
+... saving models ...
+... saving models ...
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:   avg_argmax_score ▃▃▁▄▄▆▄▃▄▅▄▅▅▆▃▆▅▄▄▆▄▄▄▇▄▄▄▄▃█▄▄▂▅▃▄▃▄▇▂
+wandb:          avg_score ▁▄▅▆▅▆▅▅▆▇▇▇▇▇▆▇▇▇▇▇▆▇▇█▇▇▇▇▆█▇▇▇▇▇▇▆▇█▇
+wandb: avg_stubborn_score ▆▃▅▄▃▅▃▅▆▅▄▆▆▇▆▇█▅▆▇▄▄▅▄▇▂▆▂▅▆▃▆▁▇▆▇▃▄▃▂
+wandb:               bail ▁▆▂▁█▄▁▂▁▁▂▁▁▃▂▂▂▁▂▃▃▃▂▂▂▂▁▃▄▂▁▁▂▂▂▂▁▂▂▂
+wandb:          max_lever ▁▂▅▄▂▄▃▄▅▆▆▆▇▇▆▆▇▆█▆▆▇██▇▆▇▆▅▇▇▆█▇▇▇▆██▇
+wandb:             prop_1 ▄▁▄▄▂▂██▅▄▆▆▄▂▅▃▃▆▄▃▂▃▃▄▂▂▃▂▂▄▃▅▄▄▅▄▃▄▅▅
+wandb:             prop_2 ▁▁▁▁▁▁▁▂▁▄▃▃▄▆▅▆▄▂▄▅▆▆▆▆▇█▆▅▂▄▆▄▆▃▄▄▆▅▆▅
+wandb:             prop_3 ▁▅▆█▃▇▂▃▆▃▄▅▆▅▂▄▆▅▆▄▃▃▅▄▅▄▅▅▇▅▅▅▄▆▄▅▆▄▃▃
+wandb:            prop_NA █▃▂▂▃▂▃▂▂▃▂▂▂▂▂▂▂▁▁▂▃▂▁▁▁▁▂▂▂▁▂▁▁▂▂▂▂▁▁▂
+wandb:             reward ▁███▆▄██▁██████▆█▇██▇▇████▁█████████████
+wandb: 
+wandb: Run summary:
+wandb:   avg_argmax_score 9.79687
+wandb:          avg_score 9.03025
+wandb: avg_stubborn_score 5.89565
+wandb:               bail 0.03
+wandb:          max_lever 0.77
+wandb:             prop_1 0.43
+wandb:             prop_2 0.17
+wandb:             prop_3 0.3
+wandb:            prop_NA 0.07
+wandb:             reward 1.0
+wandb: 
+wandb: Synced decent-sweep-56: https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/umtuh7e3
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20220923_152527-umtuh7e3/logs
+2022-09-23 16:08:07,785 - wandb.wandb_agent - INFO - Cleaning up finished run: umtuh7e3
+2022-09-23 16:08:08,044 - wandb.wandb_agent - INFO - Agent received command: run
+2022-09-23 16:08:08,044 - wandb.wandb_agent - INFO - Agent starting run with config:
+	bail_payoff: 5
+	clip: 0.2
+	ent_weight: 0.01
+	learning_rate: 0.00024
+	n_epochs: 10
+	seed: 10
+	sigma: 5
+	sigma12: 1
+2022-09-23 16:08:08,067 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sigma_sweep.py --bail_payoff=5 --clip=0.2 --ent_weight=0.01 --learning_rate=0.00024 --n_epochs=10 --seed=10 --sigma=5 --sigma12=1
+2022-09-23 16:08:13,080 - wandb.wandb_agent - INFO - Running runs: ['pngodgt6']
+wandb: Currently logged in as: jia_wan. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.13.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.13.2
+wandb: Run data is saved locally in /data/engs-oxfair3/bras5206/noisy-ZSC/tests/sigma_sweep/wandb/run-20220923_160813-pngodgt6
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run mild-sweep-72
+wandb: ⭐️ View project at https://wandb.ai/jia_wan/noisy-ZSC-tests
+wandb: 🧹 View sweep at https://wandb.ai/jia_wan/noisy-ZSC-tests/sweeps/nb9jyhvg
+wandb: 🚀 View run at https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/pngodgt6
+... saving models ...
+... saving models ...
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: - 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:   avg_argmax_score ▇▆▃▅▆▅▅▄▅▂▆▆▃▅▇▅▆▆▆▅▇▆▆▇▇▇▄█▁▄▇▄▇▂▅▇▅▆▅▄
+wandb:          avg_score ▁▅▅▅▆▇▇▆▇▆▇▇▇▇▇▇▇▆▇██▇▇▇██▇█▆▇█▇▇▆▇█▆▇▇▇
+wandb: avg_stubborn_score ▆▇▃▆▆▄▆▁▅▄▆▇█▅▇▄▄▄▆▆▅▄▅▇▅▇▃▇▄▇▁▄▆▄▅▆▅▆▅▇
+wandb:               bail ▁▃▁▃▁▁▁▁▁▁▁▁▁▁▁▁▂▂▃▂▆█▅▂▂▃▃▃▁▁▄▃▂▇▅▇▆▃▂▅
+wandb:          max_lever ▁▄▄▄▆▇▆▇▇▆▅▇▅▆▆▇▇▅▆██▇█▇█▇▆█▆▇█▇▇▆▇█▇▇▇▇
+wandb:             prop_1 ▁▅▅▃▄▄▆█▃▅▁▄▆▅▅▆▃▂▃▄▅▂▅▅▄▇▄▄▂▃▆▄▆▄▆▇▃▃▂▃
+wandb:             prop_2 ▁▁▂▃▇▇▆▃▇▅▆▆▂▃▃▆▆▄▃▅▄▄▅▆▅▅▇▄█▇▄▃▄▃▃▄▆▅▆▄
+wandb:             prop_3 ▁▄▅▃▂▃▂▃▄▃▆▅█▆▆▂▄▇█▆▄▅▃▃▅▃▂▅▃▄▃▆▄▆▅▃▃▅▇▅
+wandb:            prop_NA █▄▄▄▂▁▁▂▁▂▂▁▁▂▂▂▁▂▁▁▁▂▂▂▁▁▁▂▂▁▁▂▂▂▂▁▂▂▁▂
+wandb:             reward ▁▁██████▃█▁█▆▁███▁████▁████▁███▁███▆████
+wandb: 
+wandb: Run summary:
+wandb:   avg_argmax_score 8.30498
+wandb:          avg_score 7.68811
+wandb: avg_stubborn_score 5.8596
+wandb:               bail 0.06
+wandb:          max_lever 0.68
+wandb:             prop_1 0.21
+wandb:             prop_2 0.26
+wandb:             prop_3 0.26
+wandb:            prop_NA 0.21
+wandb:             reward 1.0
+wandb: 
+wandb: Synced mild-sweep-72: https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/pngodgt6
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20220923_160813-pngodgt6/logs
+2022-09-23 16:50:23,726 - wandb.wandb_agent - INFO - Cleaning up finished run: pngodgt6
+2022-09-23 16:50:23,984 - wandb.wandb_agent - INFO - Agent received command: run
+2022-09-23 16:50:23,985 - wandb.wandb_agent - INFO - Agent starting run with config:
+	bail_payoff: 5
+	clip: 0.2
+	ent_weight: 0.01
+	learning_rate: 0.00024
+	n_epochs: 10
+	seed: 12
+	sigma: 5
+	sigma12: 0
+2022-09-23 16:50:23,992 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sigma_sweep.py --bail_payoff=5 --clip=0.2 --ent_weight=0.01 --learning_rate=0.00024 --n_epochs=10 --seed=12 --sigma=5 --sigma12=0
+2022-09-23 16:50:29,005 - wandb.wandb_agent - INFO - Running runs: ['sguq8tuu']
+wandb: Currently logged in as: jia_wan. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.13.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.13.2
+wandb: Run data is saved locally in /data/engs-oxfair3/bras5206/noisy-ZSC/tests/sigma_sweep/wandb/run-20220923_165030-sguq8tuu
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run comfy-sweep-84
+wandb: ⭐️ View project at https://wandb.ai/jia_wan/noisy-ZSC-tests
+wandb: 🧹 View sweep at https://wandb.ai/jia_wan/noisy-ZSC-tests/sweeps/nb9jyhvg
+wandb: 🚀 View run at https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/sguq8tuu
+... saving models ...
+... saving models ...
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:   avg_argmax_score ▄█▂▆▂▄▄▄▁▄▅▄▃▇▅▇▅▂▃▆▅▄▆▄▅▃▂▃▅▇█▂▅▃▇▅▂▄▅▃
+wandb:          avg_score ▂▄▄▄▄▄▄▄▄▄▁▄▄▆▆▆▆▆▆▇▇▇█▇▇▆▇▇▇██▇█▇▇▇▇▇█▇
+wandb: avg_stubborn_score ██▃▆▃▅▆▅▅▅▂▄▆▅▄▄▄▁▆▅▅▆▅▅▆▅▄▆▅▄▇▃▅▆█▄▄▅▄▄
+wandb:               bail ▅█████████▂▂▁▁▃▂▃▃▂▁▂▁▁▁▃▂▂▂▁▂▁▂▂▂▁▁▂▂▁▂
+wandb:          max_lever ▁▂▂▂▂▂▂▂▂▂▁▃▄▅▅▅▅▆▅▆▆▆▆▇▇▅▇▇▆▇▇▇▇█▆▆▇▇█▆
+wandb:             prop_1 ▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▇▅▃▄▄▅█▆▅▅▅▂▄▃▅▅█▄▅▅▂
+wandb:             prop_2 ▁▁▁▁▁▁▁▁▁▁▄█▁▇▇▅▄▇▇▃▅██▇▄▄▃▅▄▄▅▅▆▅▆▃▇▅▇▇
+wandb:             prop_3 ▁▁▁▁▁▁▁▁▁▁▁▂█▆▄▅▇▄▆▄▂▅▃▄▄▁▅▅▄▅▇▅▆▅▄▄▄▃▃▅
+wandb:            prop_NA ▆▁▁▁▁▁▁▁▁▁█▅▄▃▂▄▃▂▂▃▃▂▂▂▂▂▂▂▃▁▂▂▂▁▂▂▂▂▁▂
+wandb:             reward ▁▄▅▅▃▄▇▃█▅▄██▁▄██▆██▆████▇████████▆▆████
+wandb: 
+wandb: Run summary:
+wandb:   avg_argmax_score 9.48884
+wandb:          avg_score 8.59774
+wandb: avg_stubborn_score 5.06049
+wandb:               bail 0.07
+wandb:          max_lever 0.72
+wandb:             prop_1 0.04
+wandb:             prop_2 0.56
+wandb:             prop_3 0.27
+wandb:            prop_NA 0.06
+wandb:             reward 1.0
+wandb: 
+wandb: Synced comfy-sweep-84: https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/sguq8tuu
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20220923_165030-sguq8tuu/logs
+2022-09-23 17:33:27,792 - wandb.wandb_agent - INFO - Cleaning up finished run: sguq8tuu
+2022-09-23 17:33:28,054 - wandb.wandb_agent - INFO - Agent received command: run
+2022-09-23 17:33:28,054 - wandb.wandb_agent - INFO - Agent starting run with config:
+	bail_payoff: 5
+	clip: 0.2
+	ent_weight: 0.01
+	learning_rate: 0.00024
+	n_epochs: 10
+	seed: 12
+	sigma: 5
+	sigma12: 6
+2022-09-23 17:33:28,112 - wandb.wandb_agent - INFO - About to run command: /usr/bin/env python sigma_sweep.py --bail_payoff=5 --clip=0.2 --ent_weight=0.01 --learning_rate=0.00024 --n_epochs=10 --seed=12 --sigma=5 --sigma12=6
+2022-09-23 17:33:33,125 - wandb.wandb_agent - INFO - Running runs: ['deuvtjhf']
+wandb: Currently logged in as: jia_wan. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.13.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.13.2
+wandb: Run data is saved locally in /data/engs-oxfair3/bras5206/noisy-ZSC/tests/sigma_sweep/wandb/run-20220923_173334-deuvtjhf
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run robust-sweep-89
+wandb: ⭐️ View project at https://wandb.ai/jia_wan/noisy-ZSC-tests
+wandb: 🧹 View sweep at https://wandb.ai/jia_wan/noisy-ZSC-tests/sweeps/nb9jyhvg
+wandb: 🚀 View run at https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/deuvtjhf
+... saving models ...
+... saving models ...
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: \ 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: | 0.001 MB of 0.001 MB uploaded (0.000 MB deduped)wandb: / 0.001 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.007 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:   avg_argmax_score ▅▅▅▇▆▂▁▃▃▇▅▆▄▆▄▄▄▃▃▅▃▇▄▄▇▁▃▅▂▆█▄▆▂▃▆▂▅▇▂
+wandb:          avg_score ▃▄▄▄▄▄▄▄▄▄▅▆▃▃▆▄▃▁▂▄▃▂▇▃▃▃▂▆▇█▄▄▅▃▃▅▄▂█▄
+wandb: avg_stubborn_score ██▃▆▃▅▆▅▅▅▂▄▆▅▄▄▄▁▆▅▅▆▅▅▆▅▄▆▅▄▇▃▅▆█▄▄▅▄▄
+wandb:               bail ██████████▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:          max_lever ▁▁▃▂▂▂▃▂▃▂▆▇▅▄▆▅▆▃▆▆▅▆▆▆▄▆▄▇█▇▆▆▅▅▃▄▆▄█▆
+wandb:             prop_1 ▁▁▁▁▁▁▁▁▁▁▇▇█▇█▇▇█▇▇▆▃▂▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:             prop_2 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▄▆▇█▆▇▇▇▇▆▆▇▇▇█▇▇▇▇
+wandb:             prop_3 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:            prop_NA ▂▁▁▁▁▁▁▁▁▁▄▃▂▄▂▄▃▁▃▃▅█▆▆▃▇▅▃▄▅▆█▅▅▅▂▄▅▅▅
+wandb:             reward █▅▆▆▅▅█▅█▆▄▃▆▄█▃▃█▃█▃▁██▆█▇▅▇▅█▄██▄▃▄██▆
+wandb: 
+wandb: Run summary:
+wandb:   avg_argmax_score 5.05539
+wandb:          avg_score 5.90808
+wandb: avg_stubborn_score 5.06049
+wandb:               bail 0.0
+wandb:          max_lever 0.4
+wandb:             prop_1 0.04
+wandb:             prop_2 0.77
+wandb:             prop_3 0.0
+wandb:            prop_NA 0.19
+wandb:             reward 1.0
+wandb: 
+wandb: Synced robust-sweep-89: https://wandb.ai/jia_wan/noisy-ZSC-tests/runs/deuvtjhf
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20220923_173334-deuvtjhf/logs
+2022-09-23 18:16:35,296 - wandb.wandb_agent - INFO - Cleaning up finished run: deuvtjhf
+2022-09-23 18:16:40,457 - wandb.wandb_agent - INFO - Running runs: []
+2022-09-23 18:16:40,751 - wandb.wandb_agent - INFO - Agent received command: exit
+2022-09-23 18:16:40,751 - wandb.wandb_agent - INFO - Received exit command. Killing runs and quitting.
+wandb: Terminating and syncing runs. Press ctrl-c to kill.

@@ -4,7 +4,7 @@ entity: Jia
 method: grid
 metric:
   goal: maximize
-  name: grid
+  name: reward
 name: ippo_xplay
 parameters:
   seed:
@@ -28,10 +28,15 @@ parameters:
     value: 5.0
   sigma:
     value: 5.0
-  sigma1:
-    value: 1 
-  sigma2:
-    value: 1
+  sigma12:
+    values: 
+      - 0 
+      - 0.5
+      - 1
+      - 2
+      - 4
+      - 6
+      - 8
   learning_rate:
     value: 0.00024
   clip:

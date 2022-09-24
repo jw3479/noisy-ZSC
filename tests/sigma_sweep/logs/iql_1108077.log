@@ -1,0 +1,3 @@
+wandb: Starting wandb agent 🕵️
+wandb: ERROR Find detailed error logs at: /data/engs-oxfair3/bras5206/noisy-ZSC/tests/sigma_sweep/wandb/debug-cli.log
+Error: Sweep jia_wan/noisy-ZSC-tests/n5x1agzl not found

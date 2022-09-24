@@ -5,8 +5,8 @@
 #SBATCH --job-name=ippo
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem-per-cpu=2G
-#SBATCH --partition=short
+#SBATCH --mem-per-cpu=256G
+#SBATCH --partition=medium
 #SBATCH --open-mode=append
 #SBATCH --clusters=all
 
@@ -16,4 +16,4 @@ module load Anaconda3
 # Load conda environment
 source activate $HOME/.conda/envs/pytorch
 
-wandb agent jia_wan/noisy-ZSC-tests/ir0fb2ay
+wandb agent jia_wan/noisy-ZSC-tests/nb9jyhvg

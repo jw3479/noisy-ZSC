@@ -49,7 +49,7 @@ def stubborn_score(true_payoff):
 def run():
     wandb.init()
     config = wandb.config
-    wandb.run.name = f"sigma1={config.sigma1}-sigma2={config.sigma2}-seed{config.seed}"
+    wandb.run.name = f"sigma12={config.sigma12}-seed{config.seed}"
     
     # Reproducible results
     random.seed(config.seed)
@@ -59,8 +59,8 @@ def run():
     mean_payoffs = [5., 5., 5.]
     bail_payoff = config.bail_payoff
     sigma = config.sigma
-    sigma1 = config.sigma1
-    sigma2 = config.sigma2
+    sigma1 = config.sigma12
+    sigma2 = config.sigma12
     episode_length = 1
 
     # hyper-parameters
@@ -79,7 +79,7 @@ def run():
                         input_dims=obs_dim, policy_clip=clip)
     agent2 = deepcopy(agent1)
     
-    n_games = 1000000
+    n_games = 500000
 
     n_steps = 0
     

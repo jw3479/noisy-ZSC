@@ -1,2 +1,0 @@
-# cross-play evaluation
-
