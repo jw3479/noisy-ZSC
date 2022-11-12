@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --time=12:00:00
-#SBATCH --output=./logs/iql_%j.log
+#SBATCH --output=./logs/ippo_%j.log
 #SBATCH --job-name=ippo_rand
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1

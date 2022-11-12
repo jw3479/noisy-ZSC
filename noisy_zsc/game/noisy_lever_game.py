@@ -1,6 +1,7 @@
 from .lever_game import LeverGame
 from typing import List, Tuple
 from random import normalvariate
+import numpy as np
 
 
 class NoisyLeverGame:
@@ -18,6 +19,9 @@ class NoisyLeverGame:
         self.payoffs1 = None
         self.payoffs2 = None
 
+        self.sortedpayoffs1 = None
+        self.sortedpayoffs2 = None
+
         self.reset()
 
     def reset(self) -> Tuple:
@@ -27,6 +31,11 @@ class NoisyLeverGame:
         # E_A (payoff1) and E_B (payoff2) are noisy versions of true_lever_game (adding noise to reward)
         self.payoffs1 = tuple([normalvariate(payoff, self.sigma1) for payoff in self.true_payoffs])
         self.payoffs2 = tuple([normalvariate(payoff, self.sigma2) for payoff in self.true_payoffs])
+
+    
+        self.sortedpayoffs1 = tuple(np.sort(self.payoffs1))
+        self.sortedpayoffs2 = tuple(np.sort(self.payoffs2))
+        
         self.true_lever_game = LeverGame(payoffs=self.true_payoffs, episode_length=self.episode_length)
 
         self.true_lever_game.reset()
@@ -35,13 +44,21 @@ class NoisyLeverGame:
     def step(self, action1: int, action2: int) -> Tuple[float, bool]:
         return self.true_lever_game.step(action1, action2)
 
-
     def get_obs(self) -> List[Tuple]:
         true_obs1, true_obs2 = self.true_lever_game.get_obs()
         #return [self.payoffs1 + (true_obs1,self.sigma, self.sigma1, self.sigma2,self.true_lever_game.episode_step,),
         #        self.payoffs2 + (true_obs2,self.sigma, self.sigma1, self.sigma2,self.true_lever_game.episode_step,)]
-        return [self.payoffs1 + (true_obs1,self.sigma, self.sigma1, self.sigma2,),
-                self.payoffs2 + (true_obs2,self.sigma, self.sigma1, self.sigma2,)]
+        
+        #obs = [self.payoffs1 + (true_obs1,self.sigma, self.sigma1, self.sigma2,self.mean_payoffs[0]),
+        #        self.payoffs2 + (true_obs2,self.sigma, self.sigma1, self.sigma2,self.mean_payoffs[0])]
+        
+        # add observation of mean reward
+        #obs = [self.payoffs1 + (self.sigma, self.sigma1, self.sigma2,self.mean_payoffs[0]),
+        #        self.payoffs2 + (self.sigma, self.sigma1, self.sigma2,self.mean_payoffs[0])]
+        obs = [self.sortedpayoffs1 + (self.sigma, self.sigma1, self.sigma2,self.mean_payoffs[0]),
+                self.sortedpayoffs2 + (self.sigma, self.sigma1, self.sigma2,self.mean_payoffs[0])]
+        
+        return obs
 
     def is_terminal(self) -> bool:
         return self.true_lever_game.is_terminal()

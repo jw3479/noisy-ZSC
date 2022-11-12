@@ -1,6 +1,5 @@
 from typing import List, Tuple
 
-
 # LeverGame setup:
 # - two players; payoff of lever according to payoffs; with episode_length
 # - observation (current): at time t, each player observes the last action of their opponent at t-1
@@ -33,7 +32,7 @@ class LeverGame:
     def get_obs(self) -> List[int]:
         if self.episode_step == 0: 
             # at time 0 no action yet and no observation (0 indicates null)
-            return [0, 0]
+            return [0,0]
         else:
             # observation (harder): indicator of whether the last action was a match
             #did_match = self.last_action1 == self.last_action2
