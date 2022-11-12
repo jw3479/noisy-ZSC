@@ -1,0 +1,36 @@
+program: test_IPPO_onlyrand.py
+project: IPPO-parameter-search
+entity: Jia
+method: random
+metric:
+  goal: maximize
+  name: reward
+name: entropy_IPPO-random-sweep
+parameters:
+  sigma:
+    values:
+      - 0
+      - 0.2
+      - 0.5
+      - 1
+      - 2
+      - 2.5
+      - 3
+  sigma12:
+    values:
+      - 0
+      - 0.2
+      - 0.5
+      - 1
+      - 2
+      - 2.5
+      - 3
+  learning_rate:
+    value: 0.00024
+  clip:
+    value: 0.2
+  n_epochs:
+    value: 10
+  ent_weight:
+    values: 
+      - 0.1
