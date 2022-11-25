@@ -1,0 +1,42 @@
+program: tests.test_IPPO
+project: IPPO-parameter-search
+entity: usman391
+method: random
+command:
+     - ${env}
+     - python 
+     - "-m" 
+     - ${program}
+     - ${args}
+metric:
+  goal: maximize
+  name: reward
+name: entropy_IPPO-random-sweep
+parameters:
+  sigma:
+    values:
+      - 0
+      - 1
+      - 2
+      - 5
+  sigma1:
+    values:
+      - 0
+      - 0.2
+  sigma2:
+    values:
+      - 0
+      - 0.2
+  learning_rate:
+    value: 0.00024
+  clip:
+    values:
+        - 0.01
+        - 0.05
+        - 0.1
+        - 0.2
+  n_epochs:
+    value: 10
+  ent_weight:
+    values: 
+      - 0.1

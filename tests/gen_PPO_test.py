@@ -76,7 +76,7 @@ for epi in range(n_games):
     
     score_history.append(score)
     
-    agent.save_models(actor_chkpt, critic_chkpt)
+    #agent.save_models(actor_chkpt, critic_chkpt)
     #avg_score = np.mean(score_history[-100:])
 
     print('episode', epi, 'score %.1f' % score, 'avg score %.1f' % avg_score)
