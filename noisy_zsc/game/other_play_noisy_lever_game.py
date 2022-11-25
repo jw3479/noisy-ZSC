@@ -34,8 +34,8 @@ class NoisyLeverGameWithOtherPlay:
         self.perm1, self.perm2 = perm1, perm2
 
         # E_A (payoff1) and E_B (payoff2) are noisy versions of true_lever_game (adding noise to reward)
-        self.payoffs1 = tuple([normalvariate(payoff, self.sigma1) for payoff in self.true_payoffs])
-        self.payoffs2 = tuple([normalvariate(payoff, self.sigma2) for payoff in self.true_payoffs])
+        self.payoffs1 = tuple([normalvariate(payoff, self.sigma1) for payoff in self.true_payoffs1])
+        self.payoffs2 = tuple([normalvariate(payoff, self.sigma2) for payoff in self.true_payoffs2])
 
         self.true_lever_game = LeverGame(payoffs=self.true_payoffs, episode_length=self.episode_length)
 
