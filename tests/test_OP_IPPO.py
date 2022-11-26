@@ -15,9 +15,12 @@ import matplotlib.pyplot as plt
 import wandb
 from copy import deepcopy
 import random
-from collections import deque
+from collections import deque, namedtuple
 import pandas as pd
 import csv
+
+#Config = namedtuple('Config', ['sigma', 'sigma1', 'sigma2', 'learning_rate', 'n_epochs', 'clip', 'ent_weight'])
+#config = Config(0, 0.1, 0.1, 0.003, 2, 0.1, 0.01)
 
 def run():
     wandb.init()
@@ -28,7 +31,7 @@ def run():
     sigma1 = config.sigma1
     sigma2 = config.sigma2
     episode_length = 1
-    wandb.run.name = f"sigma={config.sigma}-sigma1={config.sigma1}-sigma2={config.sigma2}"
+    wandb.run.name = f"SBVF-sigma={config.sigma}-sigma1={config.sigma1}-sigma2={config.sigma2}"
 
     # hyper-parameters
     lr = config.learning_rate
@@ -47,7 +50,7 @@ def run():
                         input_dims=obs_dim, policy_clip=clip)
     agent2 = deepcopy(agent1)
 
-    n_games = 500000
+    n_games = 1000000
 
     n_steps = 0
 
@@ -72,7 +75,8 @@ def run():
     bail_buffer = deque(maxlen = 100)
 
     for epi in range(n_games):
-        obs, _ = env.reset()
+        obs, true_payoffs = env.reset()
+        state = tuple(true_payoffs) + obs[1][len(true_payoffs):]
 
         #seq = sorted(env.payoffs1)
         #payoffs1_seq = [seq.index(p) for p in seq] 
@@ -85,8 +89,8 @@ def run():
 
         while not done:
 
-            action1, prob, val = agent1.choose_action(obs[0])
-            action2, prob, val = agent2.choose_action(obs[1])
+            action1, prob, val = agent1.choose_action(obs[0], state)
+            action2, prob, val = agent2.choose_action(obs[1], state)
 
             true_max.append(np.max(env.true_payoffs))
             E1_max.append(np.max(env.payoffs1))

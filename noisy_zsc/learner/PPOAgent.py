@@ -127,10 +127,11 @@ class PPOAgent:
         self.memory.store_memory(state, action, probs, vals, reward, done)
 
 
-    def choose_action(self, observation):
-        state = T.tensor([observation], dtype=T.float).to(self.actor.device)
-        dist = self.actor(state)
-        value = self.critic(state)
+    def choose_action(self, observation, state):
+        obs_t = T.tensor([observation], dtype=T.float).to(self.actor.device)
+        dist = self.actor(obs_t)
+        state_t = T.tensor([state], dtype=T.float).to(self.critic.device)
+        value = self.critic(state_t)
         action = dist.sample()
         probs = T.squeeze(dist.log_prob(action)).item()
         action = T.squeeze(action).item()
