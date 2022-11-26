@@ -8,5 +8,5 @@ with open('tests/other_play_ippo.yml', 'r') as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
-sweep_id = wandb.sweep(sweep=sweep_config)
-wandb.agent(sweep_id)
+sweep_id = wandb.sweep(sweep=sweep_config, entity='usman391')
+wandb.agent(sweep_id, entity='usman391', count=100)
