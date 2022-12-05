@@ -1,4 +1,4 @@
-program: tests.test_IPPO
+program: tests.test_OP_IPPO
 project: IPPO-parameter-search
 entity: usman391
 method: random

@@ -19,13 +19,14 @@ from collections import deque, namedtuple
 import pandas as pd
 import csv
 
-#Config = namedtuple('Config', ['sigma', 'sigma1', 'sigma2', 'learning_rate', 'n_epochs', 'clip', 'ent_weight'])
-#config = Config(0, 0.1, 0.1, 0.003, 2, 0.1, 0.01)
+Config = namedtuple('Config', ['sigma', 'sigma1', 'sigma2', 'learning_rate', 'n_epochs', 'clip', 'ent_weight'])
+#config = Config(0, 0.0, 0.0, 0.003, 2, 0.1, 0.01)
+config = Config(0, 0.0, 0.0, 0.003, 10, 0.1, 0.0)
 
 def run():
     wandb.init()
-    config = wandb.config
-    mean_payoffs = [5., 5., 5.]
+    #config = wandb.config
+    mean_payoffs = [5., 2., 3.5]
     #bail_payoff = config.bail_payoff
     sigma = config.sigma
     sigma1 = config.sigma1
@@ -87,6 +88,7 @@ def run():
         bail = -1
         epi_list.append(epi)
 
+        stats = {}
         while not done:
 
             action1, prob, val = agent1.choose_action(obs[0], state)
@@ -123,14 +125,22 @@ def run():
             agent2.remember(obs[1], action2, prob, val, reward, done)
 
             if n_steps % N == 0:
-                agent1.learn(ent_weight=config.ent_weight)
-                agent2.learn(ent_weight=config.ent_weight)
-            obs = obs_
+                actor_loss1, critic_loss1, entropy1 = agent1.learn(ent_weight=config.ent_weight)
+                actor_loss2, critic_loss2, entropy2 = agent2.learn(ent_weight=config.ent_weight)
+                stats_train = {
+                    "agent1/actor_loss": actor_loss1,
+                    "agent1/critic_loss": critic_loss1,
+                    "agent1/entropy": entropy1,
+                    "agent2/actor_loss": actor_loss2,
+                    "agent2/critic_loss": critic_loss2,
+                    "agent2/entropy": entropy2,}
+                stats.update(stats_train)
+                obs = obs_
 
         score_list.append(score)
         avg_score = np.mean(score_list[-100:])
-        stats = {
-            "avg_score": avg_score,
+        stats_game = {
+           "avg_score": avg_score,
             "reward": score / (env.episode_length * max(env.true_payoffs)),
             "prop_1": sum(1 for a in action_buffer if a == 0) / len(action_buffer),
             "prop_2": sum(1 for a in action_buffer if a == 1) / len(action_buffer),
@@ -139,6 +149,7 @@ def run():
             # number of max lever pulled in last 100 steps
             "max_lever": sum(1 for i in max_lever_buffer if i == 1) / len(max_lever_buffer), 
             "bail": sum(1 for i in bail_buffer if i == 1) / len(bail_buffer)} 
+        stats.update(stats_game)
 
         wandb.log(stats)
 
